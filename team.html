@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bansvatika Real Estate</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./style.css" />
+
+ 
+</head>
+
+<body class="text-white">
+  <!-- Header Section -->
+  <header class="header-bg py-8 md:py-12 shadow-lg rounded-b-lg">
+    <div class="container mx-auto px-4 flex justify-between items-center header-content">
+      <!-- Logo -->
+      <div class="text-3xl md:text-4xl font-bold text-white">
+        <span class="block text-blue-300 text-sm md:text-base tracking-widest">Bansvatika</span>
+      </div>
+
+      <!-- Navigation Links (Desktop) -->
+      <nav class="hidden md:flex lg:space-x-12 items-center">
+        <a href="#" class="text-white hover:text-blue-300 font-medium py-2 px-3 rounded-md">Home</a>
+        <a href="./about.html" class="text-white hover:text-blue-300 font-medium py-2 px-3 rounded-md">About</a>
+        <a href="#" class="text-white hover:text-blue-300 font-medium py-2 px-3 rounded-md">Services</a>
+        <a href="#" class="text-white hover:text-blue-300 font-medium py-2 px-3 rounded-md">Featured</a>
+        <a href="#" class="text-white hover:text-blue-300 font-medium py-2 px-3 rounded-md">Residential</a>
+        <a href="#" class="text-white hover:text-blue-300 font-medium py-2 px-3 rounded-md">Commercial</a>
+        <a href="#" class="text-white hover:text-blue-300 font-medium py-2 px-3 rounded-md">FAQ</a>
+        <a href="#" class="text-white hover:text-blue-300 font-medium py-2 px-3 rounded-md">
+          <span class="text-blue-300">(+91)</span> 8451980807
+        </a>
+      </nav>
+
+      <!-- Hamburger Menu Icon (Mobile) -->
+      <button id="hamburger" class="md:hidden focus:outline-none p-2 rounded-md bg-blue-700 hover:bg-blue-800 transition">
+        <div class="hamburger-line line-top"></div>
+        <div class="hamburger-line line-middle"></div>
+        <div class="hamburger-line line-bottom"></div>
+      </button>
+    </div>
+
+    <!-- Mobile Navigation Menu -->
+    <nav id="mobile-menu" class="hidden md:hidden bg-gray-800 bg-opacity-90 mt-4 mx-4 rounded-lg shadow-xl py-4 header-content">
+      <ul class="flex flex-col items-center space-y-4">
+        <li><a href="#" class="block px-4 py-2 text-white hover:text-blue-300 font-medium">Home Search</a></li>
+        <li><a href="#" class="block px-4 py-2 text-white hover:text-blue-300 font-medium">Neighborhoods</a></li>
+        <li><a href="#" class="block px-4 py-2 text-white hover:text-blue-300 font-medium">Contact Us</a></li>
+        <li><a href="#" class="block px-4 py-2 text-white hover:text-blue-300 font-medium">Home Valuation</a></li>
+        <li><a href="#" class="block px-4 py-2 text-blue-300 hover:text-white font-medium">(408) 515-1613</a></li>
+      </ul>
+    </nav>
+
+    <!-- Hero Content -->
+    <div class="container mx-auto px-4 py-16 md:py-24 text-center header-content">
+      <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4 text-white drop-shadow-lg">
+        Your Trusted Partner in<br />Buying, Selling, and Renting Properties.
+      </h1>
+      <p class="text-lg md:text-xl text-gray-300 mb-8 ">
+        Discover your dream property with Bansvatika Real Estate.
+      </p>
+      <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+        <a href="#" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition transform hover:scale-105">Explore Properties</a>
+        <a href="#" class="bg-transparent border-2 border-white hover:border-blue-300 text-white font-bold py-3 px-8 rounded-full shadow-lg transition transform hover:scale-105">Sell Your Property</a>
+      </div>
+    </div>
+  </header>
+
+  
+
+  <!-- JavaScript -->
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      hamburger.classList.toggle('open');
+    });
+
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        hamburger.classList.remove('open');
+      });
+    });
+  </script>
+</body>
+
+</html>
