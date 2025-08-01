@@ -14,54 +14,19 @@
     
 
     <!-- Meta Tags for Naira Properties (Open Graph for Social Sharing) -->
-    <meta property="og:site_name" content="Naira Properties">
-    <meta property="og:title" content="Naira Properties - Real Estate Agent in Mumbai, Maharashtra">
-    <meta property="og:description" content="Real estate agent in Mumbai, Maharashtra. Office No. 9, Nehru &, Hirani Villa, Junction, Nanda Patkar Rd, Navpada, Vile Parle East, Vile Parle, Mumbai, Maharashtra 400057.">
-    <meta property="og:url" content="YOUR_WEBSITE_URL_HERE"> <!-- Replace with your actual website URL -->
-    <meta property="og:type" content="business.business">
-    <meta property="og:image" content="https://yourwebsite.com/assets/logo.png"> <!-- Updated logo URL for social sharing (use absolute URL) -->
+ <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bansvatika Properties - Real Estate Agent in Mumbai</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+<link rel="stylesheet" href="./style.css">
 
-    <!-- Schema.org JSON-LD for LocalBusiness (for Search Engines) -->
-    <script type="application/ld+json">
-    {
-      "@context": "http://schema.org",
-      "@type": "LocalBusiness",
-      "name": "Naira Properties",
-      "image": "https://yourwebsite.com/assets/logo.png",  <!-- Updated logo URL for structured data (use absolute URL) -->
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Office No. 9, Nehru &, Hirani Villa, Junction, Nanda Patkar Rd, Navpada, Vile Parle East",
-        "addressLocality": "Vile Parle",
-        "addressRegion": "Maharashtra",
-        "postalCode": "400057",
-        "addressCountry": "IN"
-      },
-      "url": "YOUR_WEBSITE_URL_HERE", <!-- Replace with your actual website URL -->
-      "telephone": "+91-9987574333", <!-- Assuming this is the contact number from previous context -->
-      "description": "Real estate agent in Mumbai, Maharashtra, specializing in premium properties.",
-      "openingHoursSpecification": [
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday"
-          ],
-          "opens": "09:00",
-          "closes": "18:00"
-        }
-      ],
-      "sameAs": [
-        "YOUR_FACEBOOK_PAGE_URL",  <!-- Replace with your social media links -->
-        "YOUR_TWITTER_PAGE_URL",
-        "YOUR_LINKEDIN_PAGE_URL",
-        "https://www.instagram.com/nairapropertiesmumbai/"
-      ]
-    }
-    </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+      <!-- Schema.org JSON-LD for LocalBusiness (for Search Engines) -->
+    
 </head>
 <body class="bg-white text-gray-800">
     
@@ -81,8 +46,8 @@
                 <a href="./about.html"
                     class="nav-link font-medium py-2 px-3 rounded-md text-white hover:text-blue-300">About</a>
                 <a href="./services.html" class="nav-link font-medium py-2 px-3 rounded-md text-white hover:text-blue-300">Services</a>
-                <a href="#" class="nav-link font-medium py-2 px-3 rounded-md text-white hover:text-blue-300">Featured</a>
-                <a href="#" class="nav-link font-medium py-2 px-3 rounded-md text-white hover:text-blue-300">Residential</a>
+                <a href="./featured.html" class="nav-link font-medium py-2 px-3 rounded-md text-white hover:text-blue-300">Featured</a>
+                <a href="./residential.html" class="nav-link font-medium py-2 px-3 rounded-md text-white hover:text-blue-300">Residential</a>
                 <a href="#" class="nav-link font-medium py-2 px-3 rounded-md text-white hover:text-blue-300">Commercial</a>
                 <a href="#" class="nav-link font-medium py-2 px-3 rounded-md text-white hover:text-blue-300">FAQ</a>
                 <a href="#" class="nav-link font-medium py-2 px-3 rounded-md text-white hover:text-blue-300">
@@ -99,20 +64,20 @@
         </div>
 
         <!-- Mobile Navigation Menu -->
-        <nav id="mobile-menu" class="hidden md:hidden bg-gray-800 bg-opacity-90 mt-4 mx-4 rounded-lg shadow-xl py-4">
-            <ul class="flex flex-col items-center space-y-4">
-                <li><a href="./index.html" class="block px-4 py-2 text-white hover:text-blue-300 font-medium">Home</a></li>
-                <li><a href="./about.html" class="block px-4 py-2 text-white hover:text-blue-300 font-medium">About</a></li>
-                <li><a href="./services.html" class="block px-4 py-2 text-white hover:text-blue-300 font-medium">Services</a></li>
-                <li><a href="#" class="block px-4 py-2 text-white hover:text-blue-300 font-medium">Featured</a></li>
-                <li><a href="#" class="block px-4 py-2 text-white hover:text-blue-300 font-medium">Residential</a></li>
-                <li><a href="#" class="block px-4 py-2 text-white hover:text-blue-300 font-medium">Commercial</a></li>
-                <li><a href="#" class="block px-4 py-2 text-white hover:text-blue-300 font-medium">FAQ</a></li>
-                <li><a href="#" class="block px-4 py-2 text-white hover:text-blue-300 font-medium">
-                        <span class="text-blue-300">(+91)</span> 8451980807
-                    </a></li>
-            </ul>
-        </nav>
+      <nav id="mobile-menu" class="hidden md:hidden bg-gray-800 bg-opacity-90 mt-4 mx-4 rounded-lg shadow-xl py-4">
+      <ul class="flex flex-col items-center space-y-4">
+        <li><a href="./index.html" class="block px-4 py-2 text-white hover:text-blue-300 font-medium">Home</a></li>
+        <li><a href="./about.html" class="block px-4 py-2 text-white hover:text-blue-300 font-medium">About</a></li>
+        <li><a href="./services.html" class="block px-4 py-2 text-white hover:text-blue-300 font-medium">Services</a></li>
+        <li><a href="./featured.html" class="block px-4 py-2 text-white hover:text-blue-300 font-medium">Featured</a></li>
+        <li><a href="./residential.html" class="block px-4 py-2 text-white hover:text-blue-300 font-medium">Residential</a></li>
+        <li><a href="./commerical.html" class="block px-4 py-2 text-white hover:text-blue-300 font-medium">Commercial</a></li>
+        <li><a href="#" class="block px-4 py-2 text-white hover:text-blue-300 font-medium">FAQ</a></li>
+        <li><a href="#" class="block px-4 py-2 text-white hover:text-blue-300 font-medium">
+          <span class="text-blue-300">(+91)</span> 8451980807
+        </a></li>
+      </ul>
+    </nav>
     </nav>
 
     <!-- MAIN CONTENT: Four Unique Service Components -->
@@ -126,66 +91,60 @@
     </section>
     <!-- Service Grid Section -->
     
-    <section class="services py-16 md:py-24 bg-gray-900" id="services">
-        <h1 class="heading text-3xl md:text-4xl font-bold text-center text-blue-300 mb-12 relative">
-            Our Services
-            <div class="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-[180px] h-[4px] rounded-sm bg-blue-300"></div>
-        </h1>
+  <section class="services py-16 md:py-24 bg-gray-900" id="services">
+    <h1 class="heading text-3xl md:text-4xl font-bold text-center text-blue-300 mb-12 relative">
+        Our Services
+        <div class="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-[180px] h-[4px] rounded-sm bg-blue-300"></div>
+    </h1>
 
-        <div class="container mx-auto px-4 flex flex-col md:flex-row gap-12">
-            <!-- Service Tabs (Top Row for mobile, Left Column for desktop) -->
-            <div class="md:pl-60 w-full md:sticky md:top-24 flex flex-row flex-wrap justify-center gap-4 self-start">
-                <button class="service-tab bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-3xl shadow-md transition transform hover:scale-105" data-category="featured">Featured</button>
-                <button class="service-tab bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-3xl shadow-md transition transform hover:scale-105" data-category="for sell">Sell</button>
-                <button class="service-tab bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-3xl shadow-md transition transform hover:scale-105" data-category="for buy">Buy</button>
-                <button class="service-tab bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-3xl shadow-md transition transform hover:scale-105" data-category="for rent">Rent</button>
+    <div class="container mx-auto px-4 flex flex-col md:flex-row gap-12 ">
+        <div class="md:pl-60 w-full md:sticky md:top-24 flex flex-row flex-wrap justify-center gap-4 self-start">
+            <button class="service-tab bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-3xl shadow-md transition transform hover:scale-105" data-category="featured">Featured</button>
+            <button class="service-tab bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-3xl shadow-md transition transform hover:scale-105" data-category="for sell">Sell</button>
+            <button class="service-tab bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-3xl shadow-md transition transform hover:scale-105" data-category="for buy">Buy</button>
+            <button class="service-tab bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-3xl shadow-md transition transform hover:scale-105" data-category="for rent">Rent</button>
+        </div>
+    </div>
+    <div class="md:w-4/4  w-full mt-10">
+        <div id="property-cards-inner-container" class="flex flex-wrap justify-center gap-8">
             </div>
-        </div>
-            <!-- Property Cards Container (Right Column - now wraps) -->
-            <div class="md:w-4/4  w-full mt-10">
-                <div id="property-cards-inner-container" class="flex flex-wrap justify-center gap-8">
-                    <!-- Property cards will be dynamically loaded here by JavaScript -->
-                </div>
-            
-        </div>
 
-        <!-- Property Detail Modal/Section -->
-        <div id="property-detail-overlay" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50 hidden sm:overflow-hidden">
-            <div class="bg-gray-800 rounded-lg shadow-2xl p-8 w-full max-w-4xl max-h-[90vh] relative">
-                <button id="close-detail-btn" class="absolute top-4 right-4 text-white text-2xl hover:text-blue-300">&times;</button>
-                <div class="flex flex-col md:flex-row gap-8 h-full">
-                    <!-- Left: Property Info -->
-                    <div class="md:w-1/2 w-full flex flex-col flex-grow min-h-0">
-                        <img id="detail-property-image" src="" alt="Property Image" class="w-full h-64 object-cover rounded-md mb-4">
-                        <h2 id="detail-property-title" class="text-3xl font-bold text-white mb-3"></h2>
-                        <p id="detail-property-description" class="text-gray-300 text-base mb-4"></p>
-                        <ul id="detail-property-features" class="list-disc list-inside text-gray-400 mb-6 overflow-y-auto flex-grow"></ul>
-                        <p class="text-gray-400 text-sm mb-2">Status: <span id="detail-property-status" class="font-semibold text-blue-300"></span></p>
-                        <p class="text-gray-400 text-sm mb-4">Posted: <span id="detail-property-timeago" class="font-semibold"></span></p>
+    </div>
+
+    <div id="property-detail-overlay" class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center p-4 z-50 hidden sm:overflow-hidden">
+        <div class="bg-gray-800 rounded-lg shadow-2xl p-8 w-full max-w-4xl max-h-[90vh] relative overflow-y-auto">
+            <button id="close-detail-btn" class="absolute top-4 right-4 text-white text-2xl hover:text-blue-300">&times;</button>
+            <div class="flex flex-col md:flex-row gap-8 h-full">
+                <div class="md:w-1/2 w-full flex flex-col flex-grow min-h-0">
+                    <img id="detail-property-image" src="" alt="Property Image" class="w-full h-64 object-cover rounded-md mb-4">
+                    <h2 id="detail-property-title" class="text-3xl font-bold text-white mb-3"></h2>
+                    <p id="detail-property-description" class="text-gray-300 text-base mb-4"></p>
+                    <ul id="detail-property-features" class="list-disc list-inside text-gray-400 mb-6 overflow-y-auto flex-grow"></ul>
+                    <p class="text-gray-400 text-sm mb-2">Status: <span id="detail-property-status" class="font-semibold text-blue-300"></span></p>
+                    <p class="text-gray-400 text-sm mb-4">Posted: <span id="detail-property-timeago" class="font-semibold"></span></p>
+                </div>
+                <div class="md:w-1/2 w-full flex items-center justify-start flex-col bg-gray-700 rounded-md p-4 flex-grow min-h-0 hidden md:flex">
+                    <div id="animated-image-container" class="text-gray-400 text-center w-full mb-4">
+                        <img id="detail-animated-image" src="" alt="Property Preview" class="w-full h-auto rounded-md object-cover">
+                        <p class="mt-2 text-sm"> (Property Preview)</p>
                     </div>
-                    <!-- Right: Animated Images / Placeholder -->
-                    <div class="md:w-1/2 w-full flex items-center justify-start flex-col bg-gray-700 rounded-md p-4 flex-grow min-h-0 hidden md:flex">
-                        <div id="animated-image-container" class="text-gray-400 text-center w-full mb-4">
-                            <img id="detail-animated-image" src="" alt="Property Preview" class="w-full h-auto rounded-md object-cover">
-                            <p class="mt-2 text-sm"> (Property Preview)</p>
-                        </div>
-                        <div class="text-left w-full">
-                            <h3 class="text-xl font-semibold text-white mb-2">Additional Details:</h3>
-                            <ul class="text-gray-300 text-sm space-y-2">
-                                <li><strong>Property Type:</strong> Apartment</li>
-                                <li><strong>Area:</strong> 1200 sqft</li>
-                                <li><strong>Bedrooms:</strong> 3</li>
-                                <li><strong>Bathrooms:</strong> 2</li>
-                                <li><strong>Furnishing:</strong> Semi-furnished</li>
-                                <li><strong>Price:</strong> On Request</li>
-                                <li><strong>Availability:</strong> Immediate</li>
-                            </ul>
-                        </div>
+                    <div class="text-left w-full">
+                        <h3 class="text-xl font-semibold text-white mb-2">Additional Details:</h3>
+                        <ul class="text-gray-300 text-sm space-y-2">
+                            <li><strong>Property Type:</strong> Apartment</li>
+                            <li><strong>Area:</strong> 1200 sqft</li>
+                            <li><strong>Bedrooms:</strong> 3</li>
+                            <li><strong>Bathrooms:</strong> 2</li>
+                            <li><strong>Furnishing:</strong> Semi-furnished</li>
+                            <li><strong>Price:</strong> On Request</li>
+                            <li><strong>Availability:</strong> Immediate</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
     <section id="premium-services " class="py-20 bg-[#3f5976] bg-opacity-100"> <!-- Changed ID to premium-services -->
         <div class="max-w-8xl mx-auto px-4 ">
             <h2 class="text-5xl md:text-6xl font-bold text-center text-blue-300  mb-16 relative"> <!-- Increased font size and margin-bottom -->
@@ -194,22 +153,22 @@
             </h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
               
-                <div data-aos="fade-up" class="bg-[#faebe8] p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-b-4 border-transparent hover:border-[#736059]"> <!-- Enhanced styling -->
+                <div data-aos="fade-up" class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-b-4 border-transparent hover:border-[#736059]"> <!-- Enhanced styling -->
                     <i class="fas fa-home text-5xl text-[#1A203F] mb-6"></i> <!-- Increased icon size and margin -->
                     <h3 class="font-bold text-3xl text-gray-900 mb-3">Buy Property</h3> <!-- Increased font size -->
                     <p class="text-gray-700 text-lg leading-relaxed">Explore luxurious apartments and villas across prime Mumbai locations with expert guidance.</p> <!-- Enhanced text -->
                 </div>
-                <div data-aos="fade-up" data-aos-delay="100" class="bg-[#e4dcd1] p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-b-4 border-transparent hover:border-[#736059]"> <!-- Enhanced styling -->
+                <div data-aos="fade-up" data-aos-delay="100" class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-b-4 border-transparent hover:border-[#736059]"> <!-- Enhanced styling -->
                     <i class="fas fa-handshake text-5xl text-[#1A203F] mb-6"></i> <!-- Changed icon to handshake, increased size and margin -->
                     <h3 class="font-bold text-3xl text-gray-900 mb-3">Sell with Ease</h3> <!-- Increased font size -->
                     <p class="text-gray-700 text-lg leading-relaxed">Our team ensures your property is marketed, shown, and sold efficiently for the best value.</p> <!-- Enhanced text -->
                 </div>
-                <div data-aos="fade-up" data-aos-delay="200" class="bg-[#faebe8] p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-b-4 border-transparent hover:border-[#736059]"> <!-- Enhanced styling -->
+                <div data-aos="fade-up" data-aos-delay="200" class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-b-4 border-transparent hover:border-[#736059]"> <!-- Enhanced styling -->
                     <i class="fas fa-city text-5xl text-[#1A203F] mb-6"></i> <!-- Changed icon to city, increased size and margin -->
                     <h3 class="font-bold text-3xl text-gray-900 mb-3">Lease Commercial</h3> <!-- Increased font size -->
                     <p class="text-gray-700 text-lg leading-relaxed">We help businesses find ideal spaces for retail, offices, and showrooms in bustling areas.</p> <!-- Enhanced text -->
                 </div>
-                <div data-aos="fade-up" data-aos-delay="300" class="bg-[#e4dcd1] p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-b-4 border-transparent hover:border-[#736059]"> <!-- Enhanced styling -->
+                <div data-aos="fade-up" data-aos-delay="300" class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border-b-4 border-transparent hover:border-[#736059]"> <!-- Enhanced styling -->
                     <i class="fas fa-chart-line text-5xl text-[#1A203F] mb-6"></i> <!-- Changed icon to chart-line, increased size and margin -->
                     <h3 class="font-bold text-3xl text-gray-900 mb-3">Property Consulting</h3> <!-- Increased font size -->
                     <p class="text-gray-700 text-lg leading-relaxed">Professional guidance on investment strategies, legal advice, and portfolio planning.</p> <!-- Enhanced text -->

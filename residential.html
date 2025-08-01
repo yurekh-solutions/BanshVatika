@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BanshVatika Real Estate - Featured Properties</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        xintegrity="sha512-RXf+QSDCUQs6A+Fi3fcbCxKoKPRgttZzrmxM1p3Kda4I6U6VzW53lYMcBZRQe9OlZx9W+j59JbbxA1Z5yTSltA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        /* Custom styles for hamburger menu lines */
+        .hamburger-line {
+            width: 24px;
+            height: 3px;
+            background-color: white;
+            margin: 4px 0;
+            transition: all 0.3s ease-in-out;
+            border-radius: 2px;
+        }
+
+        /* Styles for when the hamburger is active (e.g., for an 'open' class) */
+        #hamburger.open .line-top {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        #hamburger.open .line-middle {
+            opacity: 0;
+        }
+
+        #hamburger.open .line-bottom {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+        /* Custom message box styles */
+        .message-box {
+            position: fixed;
+            top: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            color: white;
+            font-weight: 600;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .message-box.show {
+            opacity: 1;
+        }
+
+        .message-box.success {
+            background-color: #22c55e; /* Green */
+        }
+
+        .message-box.error {
+            background-color: #ef4444; /* Red */
+        }
+
+        .message-box.info {
+            background-color: #3b82f6; /* Blue */
+        }
+    </style>
+
+    <!-- Firebase SDKs -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-analytics.js";
+        import { getAuth, RecaptchaVerifier, signInWithPhoneNumber, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+        import { getFirestore, collection, addDoc, getDoc, onSnapshot, query, orderBy, where, serverTimestamp, deleteDoc } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+        import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-storage.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyCKl0mTwsYGVDPh3zDJ_aGFDiVZyJxcWC4",
+            authDomain: "banshvatika-8c881.firebaseapp.com",
+            projectId: "banshvatika-8c881",
+            storageBucket: "banshvatika-8c881.firebasestorage.app",
+            messagingSenderId: "380191987270",
+            appId: "1:380191987270:web:e5f77162b1b78550b31c47",
+            measurementId: "G-Y5GWD80ZKR"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const storage = getStorage(app);
+
+        // DOM elements
+        const loginSection = document.getElementById('login-section');
+        const loggedInSection = document.getElementById('logged-in-section');
+        const propertyForm = document.getElementById('property-form');
+        const propertyGrid = document.getElementById('property-grid');
+        const phoneInput = document.getElementById('phone-number');
+        const loginBtn = document.getElementById('login-btn');
+        const otpInput = document.getElementById('otp-input');
+        const verifyBtn = document.getElementById('verify-otp-btn');
+        const logoutBtnDesktop = document.getElementById('logout-btn-desktop'); // Desktop logout button
+        const logoutBtnMobile = document.getElementById('logout-btn-mobile'); // Mobile logout button
+        const authErrorMessage = document.getElementById('auth-error-message');
+        const propertyUploadMessage = document.getElementById('property-upload-message');
+        const messageBox = document.getElementById('message-box');
+
+        // Filter buttons
+        const filterAllBtn = document.getElementById('filter-all');
+        const filterBuyBtn = document.getElementById('filter-buy');
+        const filterRentBtn = document.getElementById('filter-rent');
+        const filterSellBtn = document.getElementById('filter-sell');
+
+        let confirmationResult;
+        let currentFilter = 'all'; // Default filter
+
+        /**
+         * Displays a custom message box to the user.
+         * @param {string} message - The message to display.
+         * @param {string} type - The type of message ('success', 'error', 'info').
+         */
+        function showMessage(message, type) {
+            messageBox.textContent = message;
+            messageBox.className = `message-box show ${type}`; // Reset classes and add new ones
+            setTimeout(() => {
+                messageBox.classList.remove('show');
+            }, 3000); // Message disappears after 3 seconds
+        }
+
+        /**
+         * Displays an error message in a specific UI element.
+         * @param {HTMLElement} element - The DOM element to display the message in.
+         * @param {string} message - The error message.
+         */
+        function displayError(element, message) {
+            element.textContent = message;
+            element.classList.remove('hidden');
+            element.classList.add('text-red-500'); // Ensure error text is red
+        }
+
+        /**
+         * Clears an error message from a specific UI element.
+         * @param {HTMLElement} element - The DOM element to clear.
+         */
+        function clearError(element) {
+            element.textContent = '';
+            element.classList.add('hidden');
+            element.classList.remove('text-red-500');
+        }
+
+        /**
+         * Fetches and displays properties based on the current filter.
+         */
+        function fetchAndDisplayProperties() {
+            let propertiesQuery = query(collection(db, "properties"), orderBy("timestamp", "desc"));
+
+            if (currentFilter !== 'all') {
+                propertiesQuery = query(propertiesQuery, where("type", "==", currentFilter));
+            }
+
+            // Use onSnapshot for real-time updates
+            onSnapshot(propertiesQuery, (snapshot) => {
+                // Clear existing properties
+                propertyGrid.innerHTML = '';
+                
+                if (snapshot.empty) {
+                    propertyGrid.innerHTML = '<p class="text-center text-gray-400 col-span-full">No properties listed yet. Be the first to upload one!</p>';
+                    return;
+                }
+
+                snapshot.forEach((doc) => {
+                    const data = doc.data();
+                    const propertyCard = `
+                        <div class="bg-gray-800 rounded-lg shadow-lg overflow-hidden transition-transform duration-300 hover:scale-105">
+                            <img src="${data.imageUrl}" alt="${data.title}" class="w-full h-48 object-cover">
+                            <div class="p-6">
+                                <h3 class="text-xl font-semibold text-blue-300 mb-2">${data.title}</h3>
+                                <p class="text-gray-400 text-sm mb-2"><i class="fas fa-tag mr-2"></i>${data.type.charAt(0).toUpperCase() + data.type.slice(1)}</p>
+                                <p class="text-gray-400 text-sm mb-4"><i class="fas fa-map-marker-alt mr-2"></i>${data.location}</p>
+                                <p class="text-white text-lg font-bold mb-4">₹${data.price.toLocaleString('en-IN')}</p>
+                                <p class="text-gray-300 text-sm">${data.description}</p>
+                                ${auth.currentUser && auth.currentUser.uid === data.userId ? 
+                                    `<div class="mt-4 text-right">
+                                        <button class="text-red-500 hover:text-red-700 text-sm" onclick="deleteProperty('${doc.id}')">
+                                            <i class="fas fa-trash-alt mr-1"></i>Delete
+                                        </button>
+                                    </div>` : ''}
+                            </div>
+                        </div>
+                    `;
+                    propertyGrid.innerHTML += propertyCard;
+                });
+            }, (error) => {
+                console.error("Error fetching properties:", error);
+                propertyGrid.innerHTML = `<p class="text-center text-red-500 col-span-full">Error loading properties: ${error.message}</p>`;
+            });
+        }
+
+        // ----- AUTHENTICATION LOGIC -----
+        // Listen for auth state changes
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // User is logged in
+                loginSection.classList.add('hidden');
+                loggedInSection.classList.remove('hidden');
+                logoutBtnDesktop.classList.remove('hidden'); // Show desktop logout
+                logoutBtnMobile.classList.remove('hidden'); // Show mobile logout
+                console.log('User logged in:', user.phoneNumber);
+                showMessage('Logged in successfully!', 'success');
+            } else {
+                // User is logged out
+                loginSection.classList.remove('hidden');
+                loggedInSection.classList.add('hidden');
+                logoutBtnDesktop.classList.add('hidden'); // Hide desktop logout
+                logoutBtnMobile.classList.add('hidden'); // Hide mobile logout
+                console.log('User logged out');
+                showMessage('Logged out.', 'info');
+            }
+            clearError(authErrorMessage); // Clear any auth errors on state change
+            fetchAndDisplayProperties(); // Re-fetch properties when auth state changes (e.g., to show/hide delete buttons)
+        });
+
+        // Initialize RecaptchaVerifier
+        // It's crucial that the 'login-btn' element exists in the DOM when this runs.
+        window.recaptchaVerifier = new RecaptchaVerifier(auth, 'login-btn', {
+            'size': 'invisible',
+            'callback': (response) => {
+                // reCAPTCHA solved, allow signInWithPhoneNumber.
+                console.log('reCAPTCHA verified.');
+            },
+            'expired-callback': () => {
+                console.log('reCAPTCHA expired. Please try again.');
+                displayError(authErrorMessage, 'reCAPTCHA expired. Please try again.');
+            }
+        });
+
+        // Handle login button click
+        loginBtn.addEventListener('click', async () => {
+            const phoneNumber = phoneInput.value;
+            clearError(authErrorMessage);
+
+            if (!phoneNumber) {
+                displayError(authErrorMessage, "Please enter a valid phone number.");
+                return;
+            }
+
+            // Disable button and show loading state
+            loginBtn.disabled = true;
+            loginBtn.textContent = 'Sending OTP...';
+
+            try {
+                const appVerifier = window.recaptchaVerifier;
+                confirmationResult = await signInWithPhoneNumber(auth, phoneNumber, appVerifier);
+                // SMS sent. Prompt user to enter the code.
+                document.getElementById('otp-fields').classList.remove('hidden');
+                loginBtn.classList.add('hidden'); // Hide "Get OTP" button
+                showMessage('OTP has been sent to your phone number.', 'success');
+            } catch (error) {
+                console.error('Error during sign-in:', error);
+                let errorMessage = 'Error sending OTP. Please check the number and try again.';
+                if (error.code === 'auth/invalid-phone-number') {
+                    errorMessage = 'Invalid phone number format. Please include country code (e.g., +91).';
+                } else if (error.code === 'auth/too-many-requests') {
+                    errorMessage = 'Too many requests. Please try again later.';
+                } else if (error.code === 'auth/network-request-failed') {
+                    errorMessage = 'Network error. Please check your internet connection.';
+                } else if (error.code === 'auth/quota-exceeded') {
+                    errorMessage = 'Quota exceeded for SMS. Please try again later or contact support.';
+                } else if (error.code === 'auth/web-storage-unsupported') {
+                    errorMessage = 'Your browser does not support web storage needed for authentication.';
+                } else if (error.code === 'auth/captcha-check-failed') {
+                    errorMessage = 'Security check failed. Please try again.';
+                } else if (error.code === 'auth/internal-error') {
+                    errorMessage = 'Authentication service error. Please ensure reCAPTCHA Enterprise API is enabled in Google Cloud Console and your domain is authorized.';
+                }
+                displayError(authErrorMessage, errorMessage);
+
+                // Reset reCAPTCHA if it failed
+                if (window.recaptchaVerifier && typeof grecaptcha !== 'undefined') {
+                    window.recaptchaVerifier.render().then(function (widgetId) {
+                        grecaptcha.reset(widgetId);
+                    });
+                }
+            } finally {
+                // Re-enable button if OTP fields are not shown (i.e., if an error occurred before showing OTP)
+                if (document.getElementById('otp-fields').classList.contains('hidden')) {
+                    loginBtn.disabled = false;
+                    loginBtn.textContent = 'Get OTP';
+                }
+            }
+        });
+
+        // Handle OTP verification button click
+        verifyBtn.addEventListener('click', async () => {
+            const code = otpInput.value;
+            clearError(authErrorMessage);
+
+            if (!code) {
+                displayError(authErrorMessage, "Please enter the OTP.");
+                return;
+            }
+
+            // Disable button and show loading state
+            verifyBtn.disabled = true;
+            verifyBtn.textContent = 'Verifying...';
+
+            try {
+                await confirmationResult.confirm(code);
+                // User signed in successfully. onAuthStateChanged will handle UI update.
+            } catch (error) {
+                console.error('Error during OTP verification:', error);
+                let errorMessage = 'Invalid OTP. Please try again.';
+                if (error.code === 'auth/invalid-verification-code') {
+                    errorMessage = 'The verification code is invalid.';
+                } else if (error.code === 'auth/code-expired') {
+                    errorMessage = 'The verification code has expired.';
+                }
+                displayError(authErrorMessage, errorMessage);
+            } finally {
+                verifyBtn.disabled = false;
+                verifyBtn.textContent = 'Verify OTP';
+            }
+        });
+
+        // Handle logout button click
+        logoutBtnDesktop.addEventListener('click', async () => {
+            try {
+                await signOut(auth);
+                // Sign-out successful. onAuthStateChanged will handle UI update.
+            } catch (error) {
+                console.error('Logout error:', error);
+                showMessage('Failed to log out. Please try again.', 'error');
+            }
+        });
+
+        logoutBtnMobile.addEventListener('click', async () => {
+            try {
+                await signOut(auth);
+                // Sign-out successful. onAuthStateChanged will handle UI update.
+            } catch (error) {
+                console.error('Logout error:', error);
+                showMessage('Failed to log out. Please try again.', 'error');
+            }
+        });
+
+
+        // ----- PROPERTY SUBMISSION LOGIC -----
+        propertyForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const title = document.getElementById('property-title').value;
+            const description = document.getElementById('property-description').value;
+            const price = document.getElementById('property-price').value;
+            const location = document.getElementById('property-location').value;
+            const type = document.getElementById('property-type').value; // Get property type
+            const imageFile = document.getElementById('property-image').files[0];
+
+            clearError(propertyUploadMessage);
+
+            if (!title || !description || !price || !location || !type || !imageFile) {
+                displayError(propertyUploadMessage, "Please fill out all fields and upload an image.");
+                return;
+            }
+
+            // Disable form fields and show loading state
+            const submitButton = propertyForm.querySelector('button[type="submit"]');
+            submitButton.disabled = true;
+            submitButton.textContent = 'Uploading Property...';
+
+            try {
+                // 1. Upload image to Firebase Storage
+                const storageRef = ref(storage, `properties/${auth.currentUser.uid}/${Date.now()}_${imageFile.name}`);
+                const snapshot = await uploadBytes(storageRef, imageFile);
+                const imageUrl = await getDownloadURL(snapshot.ref);
+
+                // 2. Save property data to Firestore
+                await addDoc(collection(db, "properties"), {
+                    title,
+                    description,
+                    price: parseFloat(price), // Store price as a number
+                    location,
+                    type, // Save the property type
+                    imageUrl,
+                    userId: auth.currentUser.uid, // Link property to the logged-in user
+                    timestamp: serverTimestamp() // Use server timestamp for consistent ordering
+                });
+
+                showMessage('Property uploaded successfully!', 'success');
+                propertyForm.reset(); // Clear the form after successful upload
+            } catch (error) {
+                console.error('Error uploading property:', error);
+                let errorMessage = 'Failed to upload property. Please try again.';
+                if (error.code === 'permission-denied') {
+                    errorMessage = 'Permission denied. Make sure your Firestore security rules allow writing.';
+                } else if (error.code === 'storage/unauthorized') {
+                    errorMessage = 'Storage permission denied. Check your Firebase Storage rules.';
+                }
+                displayError(propertyUploadMessage, errorMessage);
+            } finally {
+                // Re-enable form fields and button
+                submitButton.disabled = false;
+                submitButton.textContent = 'Upload Property';
+            }
+        });
+
+        // ----- PROPERTY DISPLAY LOGIC -----
+        // Initial call to display properties
+        fetchAndDisplayProperties(); 
+
+        // Filter button event listeners
+        filterAllBtn.addEventListener('click', () => {
+            currentFilter = 'all';
+            fetchAndDisplayProperties();
+            showMessage('Showing all properties.', 'info');
+        });
+        filterBuyBtn.addEventListener('click', () => {
+            currentFilter = 'buy';
+            fetchAndDisplayProperties();
+            showMessage('Showing properties for buy.', 'info');
+        });
+        filterRentBtn.addEventListener('click', () => {
+            currentFilter = 'rent';
+            fetchAndDisplayProperties();
+            showMessage('Showing properties for rent.', 'info');
+        });
+        filterSellBtn.addEventListener('click', () => {
+            currentFilter = 'sell';
+            fetchAndDisplayProperties();
+            showMessage('Showing properties for sell.', 'info');
+        });
+
+
+        // Global function for deleting property (called from onclick)
+        window.deleteProperty = async (propertyId) => {
+            // Replaced window.confirm with a custom modal/message if needed in a full app,
+            // but for simplicity, keeping this as a basic confirmation.
+            if (!confirm("Are you sure you want to delete this property?")) {
+                return;
+            }
+
+            try {
+                // Get the document to verify userId before deleting
+                const docRef = doc(db, "properties", propertyId);
+                const docSnap = await getDoc(docRef); 
+
+                if (docSnap.exists() && auth.currentUser && docSnap.data().userId === auth.currentUser.uid) {
+                    await deleteDoc(docRef);
+                    showMessage('Property deleted successfully!', 'success');
+                } else {
+                    showMessage('You do not have permission to delete this property.', 'error');
+                }
+            } catch (error) {
+                console.error('Error deleting property:', error);
+                showMessage('Failed to delete property. See console for details.', 'error');
+            }
+        };
+
+    </script>
+</head>
+
+<body class="text-white font-inter bg-gray-900">
+    <!-- Custom Message Box -->
+    <div id="message-box" class="message-box"></div>
+
+    <!-- Fixed Header (this navigation bar will change on scroll) -->
+    <nav id="scrolled-header"
+        class="fixed top-0 left-0 w-full z-50 transition-all duration-300 ease-in-out py-4 bg-transparent text-white">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <!-- Logo -->
+            <div class="text-3xl md:text-4xl font-bold">
+                <span class="block text-blue-300 text-sm md:text-base tracking-widest">BanshVatika</span>
+            </div>
+
+            <!-- Navigation Links (Desktop) -->
+            <nav class="hidden md:flex lg:space-x-12 items-center">
+                <a href="./index.html"
+                    class="nav-link font-medium py-2 px-3 rounded-md text-white hover:text-blue-300">Home</a>
+                <a href="./about.html"
+                    class="nav-link font-medium py-2 px-3 rounded-md text-white hover:text-blue-300">About</a>
+                <a href="./services.html"
+                    class="nav-link font-medium py-2 px-3 rounded-md text-white hover:text-blue-300">Services</a>
+                <a href="./featured.html"
+                    class="nav-link font-medium py-2 px-3 rounded-md text-white hover:text-blue-300">Featured</a>
+                <a href="./residential.html"
+                    class="nav-link font-medium py-2 px-3 rounded-md text-white hover:text-blue-300">Residential</a>
+                <a href="./commerical.html" class="nav-link font-medium py-2 px-3 rounded-md text-white hover:text-blue-300">Commercial</a>
+                <a href="#" class="nav-link font-medium py-2 px-3 rounded-md text-white hover:text-blue-300">FAQ</a>
+                <a href="#" class="nav-link font-medium py-2 px-3 rounded-md text-white hover:text-blue-300">
+                    <span class="text-blue-300">(+91)</span> 8451980807
+                </a>
+                <!-- Desktop Logout Button (initially hidden, shown when logged in) -->
+                <!-- <button id="logout-btn-desktop" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-md hidden">
+                    Logout
+                </button> -->
+            </nav>
+
+            <!-- Hamburger Menu Icon (Mobile) -->
+            <button id="hamburger" class="md:hidden focus:outline-none p-2 rounded-md hover:bg-blue-800 transition">
+                <div class="hamburger-line line-top"></div>
+                <div class="hamburger-line line-middle"></div>
+                <div class="hamburger-line line-bottom"></div>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <nav id="mobile-menu" class="hidden md:hidden bg-gray-800 bg-opacity-90 mt-4 mx-4 rounded-lg shadow-xl py-4">
+            <ul class="flex flex-col items-center space-y-4">
+                <li><a href="./index.html" class="block px-4 py-2 text-white hover:text-blue-300 font-medium">Home</a></li>
+                <li><a href="./about.html" class="block px-4 py-2 text-white hover:text-blue-300 font-medium">About</a></li>
+                <li><a href="#" class="block px-4 py-2 text-white hover:text-blue-300 font-medium">Services</a></li>
+                <li><a href="#" class="block px-4 py-2 text-white hover:text-blue-300 font-medium">Featured</a></li>
+                <li><a href="#" class="block px-4 py-2 text-white hover:text-blue-300 font-medium">Residential</a></li>
+                <li><a href="#" class="block px-4 py-2 text-white hover:text-blue-300 font-medium">Commercial</a></li>
+                <li><a href="#" class="block px-4 py-2 text-white hover:text-blue-300 font-medium">FAQ</a></li>
+                <li><a href="#" class="block px-4 py-2 text-white hover:text-blue-300 font-medium">
+                        <span class="text-blue-300">(+91)</span> 8451980807
+                    </a></li>
+                <!-- Mobile Logout Button (initially hidden, shown when logged in) -->
+                <li><button id="logout-btn-mobile" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-md hidden">
+                        Logout
+                    </button></li>
+            </ul>
+        </nav>
+    </nav>
+
+    <section class="hero relative h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden" data-aos="fade">
+        <div class="absolute inset-0">
+            <img src="./images/featured-2.jpg" alt="Residential Properties Hero Image" class="w-full h-full object-cover blur-sm">
+            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                <h1 class="text-white text-4xl md:text-5xl lg:text-6xl font-bold text-center">Residential Properties</h1>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content for Login/Property Upload -->
+    <main class="container mx-auto px-4 py-16">
+        <!-- Login Section (Visible when not logged in) -->
+        <div id="login-section" class="max-w-md mx-auto bg-gray-800 p-8 rounded-lg shadow-xl mb-12">
+            <h2 class="text-3xl font-bold text-center text-blue-300 mb-6">Login with Phone Number</h2>
+            <p class="text-center text-gray-400 mb-6">
+                Login to upload your own property listing.
+            </p>
+            <div class="space-y-4">
+                <div>
+                    <label for="phone-number" class="block text-sm font-medium text-gray-300">Phone Number (e.g., +918451980807)</label>
+                    <input type="tel" id="phone-number"
+                        class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:ring-blue-500 focus:border-blue-500"
+                        placeholder="Enter your phone number">
+                </div>
+                <button id="login-btn"
+                    class="w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 rounded-md text-white font-semibold transition">
+                    Get OTP
+                </button>
+                <div id="auth-error-message" class="text-red-500 text-sm mt-2 hidden"></div>
+            </div>
+            <div id="otp-fields" class="mt-4 hidden space-y-4">
+                <div>
+                    <label for="otp-input" class="block text-sm font-medium text-gray-300">OTP</label>
+                    <input type="number" id="otp-input"
+                        class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:ring-blue-500 focus:border-blue-500"
+                        placeholder="Enter the 6-digit OTP">
+                </div>
+                <button id="verify-otp-btn"
+                    class="w-full py-3 px-4 bg-green-600 hover:bg-green-700 rounded-md text-white font-semibold transition">
+                    Verify OTP
+                </button>
+            </div>
+        </div>
+
+        <!-- Logged-in Section (Hidden by default) -->
+        <div id="logged-in-section" class="hidden">
+            <!-- Property Submission Form -->
+            <div class="max-w-3xl mx-auto bg-gray-800 p-8 rounded-lg shadow-xl mb-12">
+                <h2 class="text-3xl font-bold text-center text-blue-300 mb-6">Upload Your Property</h2>
+                <form id="property-form" class="space-y-6">
+                    <div>
+                        <label for="property-title" class="block text-sm font-medium text-gray-300">Property Title</label>
+                        <input type="text" id="property-title" required
+                            class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label for="property-description" class="block text-sm font-medium text-gray-300">Description</label>
+                        <textarea id="property-description" rows="4" required
+                            class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:ring-blue-500 focus:border-blue-500"></textarea>
+                    </div>
+                    <div>
+                        <label for="property-price" class="block text-sm font-medium text-gray-300">Price (in ₹)</label>
+                        <input type="number" id="property-price" required
+                            class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label for="property-location" class="block text-sm font-medium text-gray-300">Location</label>
+                        <input type="text" id="property-location" required
+                            class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+                    <div>
+                        <label for="property-type" class="block text-sm font-medium text-gray-300">Property Type</label>
+                        <select id="property-type" required
+                            class="mt-1 block w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-white focus:ring-blue-500 focus:border-blue-500">
+                            <option value="">Select Type</option>
+                            <option value="buy">Buy</option>
+                            <option value="rent">Rent</option>
+                            <option value="sell">Sell</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="property-image" class="block text-sm font-medium text-gray-300">Property Image</label>
+                        <input type="file" id="property-image" accept="image/*" required
+                            class="mt-1 block w-full text-white file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-500 file:text-white hover:file:bg-blue-600">
+                    </div>
+                    <button type="submit"
+                        class="w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 rounded-md text-white font-semibold transition">
+                        Upload Property
+                    </button>
+                    <div id="property-upload-message" class="text-red-500 text-sm mt-2 hidden"></div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Property Display Grid -->
+        <h2 class="text-3xl font-bold text-center text-blue-300 mb-8">All Properties</h2>
+        
+        <!-- Filter Buttons -->
+        <div class="flex flex-wrap justify-center gap-4 mb-8">
+            <button id="filter-all" class="px-6 py-2 rounded-md bg-blue-600 hover:bg-blue-700 text-white font-semibold transition">All</button>
+            <button id="filter-buy" class="px-6 py-2 rounded-md bg-gray-700 hover:bg-blue-700 text-white font-semibold transition">Buy</button>
+            <button id="filter-rent" class="px-6 py-2 rounded-md bg-gray-700 hover:bg-blue-700 text-white font-semibold transition">Rent</button>
+            <button id="filter-sell" class="px-6 py-2 rounded-md bg-gray-700 hover:bg-blue-700 text-white font-semibold transition">Sell</button>
+        </div>
+
+        <div id="property-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Property cards will be dynamically inserted here by Firebase -->
+        </div>
+    </main>
+    
+ <section class="faq py-16 md:py-24 bg-gray-900" id="faq">
+        <h1 class="heading text-3xl md:text-4xl font-bold text-center text-blue-300 mb-12 relative">
+            Frequently Asked Questions
+            <div class="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-[180px] h-[4px] rounded-sm bg-blue-300"></div>
+        </h1>
+
+        <div class="max-w-4xl mx-auto px-4 space-y-4">
+            <!-- FAQ Item 1 -->
+            <details class="bg-gray-800 rounded-lg shadow-md overflow-hidden group">
+                <summary class="flex justify-between items-center p-5 cursor-pointer text-lg font-semibold text-white hover:bg-gray-700 transition duration-300">
+                    What types of properties does BanshVatika deal with?
+                    <span class="text-blue-300 text-xl transform group-open:rotate-180 transition-transform duration-300">&#9660;</span>
+                </summary>
+                <div class="px-5 pb-5 text-gray-300 leading-relaxed border-t border-gray-700">
+                    <p>BanshVatika specializes in a wide range of properties including residential (apartments, villas, plots) and commercial (office spaces, retail shops, industrial properties).</p>
+                </div>
+            </details>
+
+            <!-- FAQ Item 2 -->
+            <details class="bg-gray-800 rounded-lg shadow-md overflow-hidden group">
+                <summary class="flex justify-between items-center p-5 cursor-pointer text-lg font-semibold text-white hover:bg-gray-700 transition duration-300">
+                    How can I list my property for sale or rent?
+                    <span class="text-blue-300 text-xl transform group-open:rotate-180 transition-transform duration-300">&#9660;</span>
+                </summary>
+                <div class="px-5 pb-5 text-gray-300 leading-relaxed border-t border-gray-700">
+                    <p>You can easily list your property by visiting our "Sell Your Property" section or by contacting us directly through the inquiry form. Our team will guide you through the process.</p>
+                </div>
+            </details>
+
+            <!-- FAQ Item 3 -->
+            <details class="bg-gray-800 rounded-lg shadow-md overflow-hidden group">
+                <summary class="flex justify-between items-center p-5 cursor-pointer text-lg font-semibold text-white hover:bg-gray-700 transition duration-300">
+                    Do you offer property management services?
+                    <span class="text-blue-300 text-xl transform group-open:rotate-180 transition-transform duration-300">&#9660;</span>
+                </summary>
+                <div class="px-5 pb-5 text-gray-300 leading-relaxed border-t border-gray-700">
+                    <p>Yes, we offer comprehensive property management services for both residential and commercial properties, ensuring hassle-free ownership for our clients.</p>
+                </div>
+            </details>
+
+            <!-- FAQ Item 4 -->
+            <details class="bg-gray-800 rounded-lg shadow-md overflow-hidden group">
+                <summary class="flex justify-between items-center p-5 cursor-pointer text-lg font-semibold text-white hover:bg-gray-700 transition duration-300">
+                    How do I schedule a property viewing?
+                    <span class="text-blue-300 text-xl transform group-open:rotate-180 transition-transform duration-300">&#9660;</span>
+                </summary>
+                <div class="px-5 pb-5 text-gray-300 leading-relaxed border-t border-gray-700">
+                    <p>You can schedule a viewing by clicking the "View Details" button on any property card and then using the contact options provided within the property detail overlay, or by reaching out to us via the Contact Us form.</p>
+                </div>
+            </details>
+        </div>
+    </section>
+
+
+    <!-- Footer Section -->
+ <footer class="bg-gray-800 py-12">
+  <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center md:text-left">
+    <!-- Quick Links -->
+    <div>
+      <h3 class="text-lg font-semibold text-white mb-4">Quick Links</h3>
+      <ul class="space-y-2">
+        <li><a href="./index.html" class="text-gray-400 hover:text-blue-300 transition">Home</a></li>
+        <li><a href="./about.html" class="text-gray-400 hover:text-blue-300 transition">About Us</a></li>
+        <li><a href="#services" class="text-gray-400 hover:text-blue-300 transition">Services</a></li>
+        <li><a href="#faq" class="text-gray-400 hover:text-blue-300 transition">FAQ</a></li>
+        <li><a href="#contact" class="text-gray-400 hover:text-blue-300 transition">Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- Opening Hours -->
+    <div>
+      <h3 class="text-lg font-semibold text-white mb-4">Opening Hours</h3>
+      <p class="text-gray-400 text-lg">Monday - Saturday: 10:00 AM - 10:00 PM</p>
+      <p class="text-gray-400 text-sm mt-2">Experience reliable service and quality products. We're here to help you stay connected!</p>
+      <p class="text-gray-400 text-sm mt-2">BanshVatika Real Estate specializes in buying, selling, renting, and investing in both commercial and residential properties. Our primary areas of expertise cover Mumbai, Maharashtra.</p>
+    </div>
+
+    <!-- Contact Info -->
+    <div>
+      <h3 class="text-lg font-semibold text-white mb-4">Contact Info</h3>
+      <ul class="space-y-2">
+        <li>
+          <a href="tel:+918451980807" class="inline-flex items-center text-gray-400 hover:text-blue-300 transition">
+            <i class="fas fa-phone-alt text-lg mr-2"></i>
+            <span class="text-base font-medium">+91 84519 80807</span>
+          </a>
+        </li>
+        <li>
+          <a href="mailto:info@banshvatika.com" class="inline-flex items-center text-gray-400 hover:text-blue-300 transition">
+            <i class="fas fa-envelope text-lg mr-2"></i>
+            <span class="text-base font-medium">info@banshvatika.com</span>
+          </a>
+        </li>
+        <li class="inline-flex items-start text-gray-400">
+          <i class="fas fa-map-marker-alt text-lg mr-2 mt-1"></i>
+          <span class="text-base font-medium">
+            BanshVatika Real Estate specializes in buying, selling, renting, and investing in both commercial and residential properties. Our primary areas of expertise cover Mumbai, Maharashtra.
+          </span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Stay Connected -->
+    <div class="flex flex-col items-center md:items-end">
+      <h3 class="text-lg font-semibold text-white mb-4">Stay Connected</h3>
+      <p class="text-gray-400 text-sm mb-4 text-center md:text-right">Follow us on social media for updates and offers.</p>
+      <div class="flex justify-center md:justify-end space-x-4 mb-8">
+        <a href="https://www.facebook.com/banshvatika" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-blue-600 transition">
+          <i class="fab fa-facebook-f text-2xl"></i>
+        </a>
+        <a href="https://twitter.com/banshvatika" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-blue-400 transition">
+          <i class="fab fa-twitter text-2xl"></i>
+        </a>
+        <a href="https://www.instagram.com/banshvatika/" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-pink-500 transition">
+          <i class="fab fa-instagram text-2xl"></i>
+        </a>
+        <a href="https://www.linkedin.com/company/banshvatika" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-blue-700 transition">
+          <i class="fab fa-linkedin-in text-2xl"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Divider line -->
+  <div class="container mx-auto px-4">
+    <hr class="border-gray-700 my-6" />
+    <p class="text-gray-400 text-sm text-center">&copy; 2025 BanshVatika. All rights reserved. Designed with 
+      <a href="https://www.yurekhitsolutions.com" target="_blank" rel="noopener noreferrer" class="hover:text-blue-300">YUREKH IT SOLUTIONS</a>
+    </p>
+  </div>
+</footer>
+  <div class="fixed bottom-4 right-4 z-50 flex flex-col space-y-3">
+        <a href="https://wa.me/919930670707" class="bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center text-3xl shadow-lg hover:bg-green-600 transition-all duration-300 ease-in-out transform hover:scale-110" target="_blank" aria-label="WhatsApp Us">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="tel:+919930670707" class="bg-blue-500 text-white w-14 h-14 rounded-full flex items-center justify-center text-3xl shadow-lg hover:bg-blue-600 transition-all duration-300 ease-in-out transform hover:scale-110" aria-label="Call Us">
+            <i class="fas fa-phone-alt"></i>
+        </a>
+        <button id="scroll-to-top-btn" class="bg-gray-700 text-white w-14 h-14 rounded-full flex items-center justify-center text-3xl shadow-lg hover:bg-gray-800 transition-all duration-300 ease-in-out transform hover:scale-110 hidden" aria-label="Scroll to Top">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+    </div>
+
+    <!-- Custom JavaScript for the navigation bar scroll effect and mobile menu -->
+    <script>
+        const scrolledHeader = document.getElementById('scrolled-header');
+        const hamburgerBtn = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        // Scroll effect for header
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                scrolledHeader.classList.add('bg-gray-800', 'shadow-lg', 'py-4');
+                scrolledHeader.classList.remove('bg-transparent');
+            } else {
+                scrolledHeader.classList.remove('bg-gray-800', 'shadow-lg', 'py-4');
+                scrolledHeader.classList.add('bg-transparent');
+            }
+        });
+
+        // Mobile menu toggle
+        hamburgerBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            hamburgerBtn.classList.toggle('open'); // Add/remove 'open' class for hamburger animation
+        });
+    </script>
+</body>
+
+</html>

@@ -1,191 +1,655 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Naira Properties - Real Estate Agent in Mumbai</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"/>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="./style.css" />
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BanshVatika Real Estate - Featured Properties</title>
 
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        xintegrity="sha512-RXf+QSDCUQs6A+Fi3fcbCxKoKPRgttZzrmxM1p3Kda4I6U6VzW53lYMcBZRQe9OlZx9W+j59JbbxA1Z5yTSltA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        /* Custom styles for the hamburger menu lines */
+        .hamburger-line {
+            width: 25px;
+            height: 3px;
+                    background-color: rgba(17, 24, 39, 0.9);
+
+            margin: 5px 0;
+            transition: all 0.3s ease-in-out;
+            border-radius: 2px;
+        }
+
+        /* Styles for the header on scroll */
+        .scrolled {
+            background-color: rgba(17, 24, 39, 0.9);
+            /* Dark gray with transparency */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding-top: 0.75rem;
+            padding-bottom: 0.75rem;
+        }
+
+        /* Keyframes for the pulse animation on card click */
+        @keyframes pulse-once {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            }
+
+            50% {
+                transform: scale(1.02);
+                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            }
+
+            100% {
+                transform: scale(1);
+                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            }
+        }
+
+        /* Styles for clicked cards - Adjusted to gray-700 */
+        .property-card.clicked {
+            background-color: #374151;
+            /* Tailwind's gray-700 */
+            animation: pulse-once 0.5s ease-in-out forwards;
+            /* Apply pulse animation */
+        }
+    </style>
 </head>
-<body class="bg-white text-gray-800">
 
-  <header class="header">
-    <a href="#home" class="logo">
-       Naira Properties
-    </a>
-   <nav class="navbar">
-            <a href="./home.html">home</a>
-            <a href="./about.html">about</a>
-            <a href="./services.html">services</a>
-            <a href="./featured.html">featured</a>
-            <a href="./team.html">team</a>
-            <a href="./contact.html">contact</a>
-            <a href="./sell.html ">Sell</a>
-            <a href="./buy.html">Buy</a>
-        </nav>
-    <div class="fas fa-bars" id="menu"></div>
-  </header>
- <section class="hero relative h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden" data-aos="fade">
-    <div class="absolute inset-0">
-      <img src="./images/services-1.jpg" alt="Modern Living Room" class="w-full h-full object-cover blur-sm">
-      <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-        <h1 class="text-white text-4xl md:text-5xl lg:text-6xl font-bold text-center">Featured</h1>
-      </div>
-    </div>
-  </section>
-  <!-- WHY NAIRA PROPERTIES SECTION -->
-  <section class="featured" id="featured">
-        <h1 class="heading">featured properties</h1>
-        <div class="box-container" id="property-container">
+<body class="text-white font-inter bg-gray-900">
+    <!-- Fixed Header (this navigation bar will change on scroll) -->
+    <nav id="scrolled-header"
+        class="fixed top-0 left-0 w-full z-50 transition-all duration-300 ease-in-out py-4 bg-transparent text-white">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <!-- Logo -->
+            <div class="text-3xl md:text-4xl font-bold">
+                <span class="block text-blue-300 text-sm md:text-base tracking-widest">BanshVatika</span>
             </div>
+
+            <!-- Navigation Links (Desktop) -->
+            <nav class="hidden md:flex lg:space-x-12 items-center">
+                <a href="./index.html"
+                    class="nav-link font-medium py-2 px-3 rounded-md text-white hover:text-blue-300">Home</a>
+                <a href="./about.html"
+                    class="nav-link font-medium py-2 px-3 rounded-md text-white hover:text-blue-300">About</a>
+                <a href="./services.html"
+                    class="nav-link font-medium py-2 px-3 rounded-md text-white hover:text-blue-300">Services</a>
+                <a href="./featured.html"
+                    class="nav-link font-medium py-2 px-3 rounded-md text-white hover:text-blue-300">Featured</a>
+                <a href="./residential.html" class="nav-link font-medium py-2 px-3 rounded-md text-white hover:text-blue-300">Residential</a>
+                <a href="#" class="nav-link font-medium py-2 px-3 rounded-md text-white hover:text-blue-300">Commercial</a>
+                <a href="#" class="nav-link font-medium py-2 px-3 rounded-md text-white hover:text-blue-300">FAQ</a>
+                <a href="#" class="nav-link font-medium py-2 px-3 rounded-md text-white hover:text-blue-300">
+                    <span class="text-blue-300">(+91)</span> 8451980807
+                </a>
+            </nav>
+
+            <!-- Hamburger Menu Icon (Mobile) -->
+            <button id="hamburger" class="md:hidden focus:outline-none p-2 rounded-md hover:bg-blue-800 transition">
+                <div class="hamburger-line line-top"></div>
+                <div class="hamburger-line line-middle"></div>
+                <div class="hamburger-line line-bottom"></div>
+            </button>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+       <nav id="mobile-menu" class="hidden md:hidden bg-gray-800 bg-opacity-90 mt-4 mx-4 rounded-lg shadow-xl py-4">
+      <ul class="flex flex-col items-center space-y-4">
+        <li><a href="./index.html" class="block px-4 py-2 text-white hover:text-blue-300 font-medium">Home</a></li>
+        <li><a href="./about.html" class="block px-4 py-2 text-white hover:text-blue-300 font-medium">About</a></li>
+        <li><a href="./services.html" class="block px-4 py-2 text-white hover:text-blue-300 font-medium">Services</a></li>
+        <li><a href="./featured.html" class="block px-4 py-2 text-white hover:text-blue-300 font-medium">Featured</a></li>
+        <li><a href="./residential.html" class="block px-4 py-2 text-white hover:text-blue-300 font-medium">Residential</a></li>
+        <li><a href="./commerical.html" class="block px-4 py-2 text-white hover:text-blue-300 font-medium">Commercial</a></li>
+        <li><a href="#" class="block px-4 py-2 text-white hover:text-blue-300 font-medium">FAQ</a></li>
+        <li><a href="#" class="block px-4 py-2 text-white hover:text-blue-300 font-medium">
+          <span class="text-blue-300">(+91)</span> 8451980807
+        </a></li>
+      </ul>
+    </nav>
+    </nav>
+
+    <!-- Hero Section -->
+     
+    <section class="hero relative h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden" data-aos="fade">
+        <div class="absolute inset-0">
+            <img src="./images/featured-6.jpg" alt=""
+                class="w-full h-full object-cover blur-sm">
+            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                <h1 class="text-white text-4xl md:text-5xl lg:text-6xl font-bold text-center">Featured Properties</h1>
+            </div>
+        </div>
     </section>
 
+    <!-- Featured Properties Section -->
+    <section class="featured py-16 px-4 md:px-8 lg:px-16">
+        <h2 class="text-4xl md:text-5xl font-bold text-center text-blue-300 mb-12">Our Featured Listings</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="property-container">
+            <!-- Property cards will be dynamically inserted here by JavaScript -->
+        </div>
+    </section>
+  <section class="bg-[#3f5976] bg-opacity-100 py-12">
+        <div class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="heading text-3xl md:text-4xl font-bold text-center text-blue-300 mb-12 relative">Featured Highlights
+                <div class="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-[180px] h-[4px] rounded-sm bg-blue-300"></div>
+            </h2>
+            <div id="highlights-carousel" class="relative w-full overflow-hidden">
+                <div id="carousel-inner" class="flex transition-transform duration-1000 ease-in-out">
+                    <!-- Carousel items will be injected here by JavaScript -->
+                    <div class="group relative flex-none w-full sm:w-1/2 md:w-1/3 lg:w-1/4 h-[250px] rounded-xl shadow-lg overflow-hidden cursor-pointer mx-4">
+                        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
+                            style="background-image: url('https://images.unsplash.com/photo-1572120360610-d971b9d7767c');">
+                        </div>
+                        <div
+                            class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end p-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <h3 class="text-lg sm:text-xl font-semibold mb-2">Modern Family Home</h3>
+                            <p class="text-sm sm:text-base">Spacious living in a prime location, perfect for families.</p>
+                        </div>
+                    </div>
 
+                    <div class="group relative flex-none w-full sm:w-1/2 md:w-1/3 lg:w-1/4 h-[250px] rounded-xl shadow-lg overflow-hidden cursor-pointer mx-4">
+                        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
+                            style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c');">
+                        </div>
+                        <div
+                            class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end p-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <h3 class="text-lg sm:text-xl font-semibold mb-2">Luxury Apartment</h3>
+                            <p class="text-sm sm:text-base">Elegant design with breathtaking city views.</p>
+                        </div>
+                    </div>
 
+                    <div class="group relative flex-none w-full sm:w-1/2 md:w-1/3 lg:w-1/4 h-[250px] rounded-xl shadow-lg overflow-hidden cursor-pointer mx-4">
+                        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
+                            style="background-image: url('https://images.unsplash.com/photo-1615874959474-d609969a20ed');">
+                        </div>
+                        <div
+                            class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end p-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <h3 class="text-lg sm:text-xl font-semibold mb-2">Charming Villa</h3>
+                            <p class="text-sm sm:text-base">A serene escape with a private garden.</p>
+                        </div>
+                    </div>
 
-<section class="bg-gray-100 py-12">
-    <div class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-4xl md:text-5xl font-bold text-center text-[#736059] mb-12">Featured Highlights</h2>
+                    <div class="group relative flex-none w-full sm:w-1/2 md:w-1/3 lg:w-1/4 h-[250px] rounded-xl shadow-lg overflow-hidden cursor-pointer mx-4">
+                        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
+                            style="background-image: url('https://images.unsplash.com/photo-1580587771525-78b9dba3b914');">
+                        </div>
+                        <div
+                            class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end p-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <h3 class="text-lg sm:text-xl font-semibold mb-2">Urban Penthouse</h3>
+                            <p class="text-sm sm:text-base">Sophisticated living in the heart of the city.</p>
+                        </div>
+                    </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 place-items-center">
-            <div class="group relative w-full h-[250px] rounded-xl shadow-lg overflow-hidden cursor-pointer">
-                <div class="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
-                    style="background-image: url('https://images.unsplash.com/photo-1572120360610-d971b9d7767c');">
-                </div>
-                <div
-                    class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end p-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <h3 class="text-xl font-semibold mb-2">Modern Family Home</h3>
-                    <p class="text-sm">Spacious living in a prime location, perfect for families.</p>
-                </div>
-            </div>
+                    <div class="group relative flex-none w-full sm:w-1/2 md:w-1/3 lg:w-1/4 h-[250px] rounded-xl shadow-lg overflow-hidden cursor-pointer mx-4">
+                        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
+                            style="background-image: url('https://images.unsplash.com/photo-1507089947368-19c1da9775ae');">
+                        </div>
+                        <div
+                            class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end p-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <h3 class="text-lg sm:text-xl font-semibold mb-2">Cozy Studio Apartment</h3>
+                            <p class="text-sm sm:text-base">Ideal for singles or young professionals.</p>
+                        </div>
+                    </div>
 
-            <div class="group relative w-full h-[250px] rounded-xl shadow-lg overflow-hidden cursor-pointer">
-                <div class="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
-                    style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c');">
-                </div>
-                <div
-                    class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end p-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <h3 class="text-xl font-semibold mb-2">Luxury Apartment</h3>
-                    <p class="text-sm">Elegant design with breathtaking city views.</p>
-                </div>
-            </div>
+                    <div class="group relative flex-none w-full sm:w-1/2 md:w-1/3 lg:w-1/4 h-[250px] rounded-xl shadow-lg overflow-hidden cursor-pointer mx-4">
+                        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
+                            style="background-image: url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750');">
+                        </div>
+                        <div
+                            class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end p-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <h3 class="text-lg sm:text-xl font-semibold mb-2">Spacious Commercial Office</h3>
+                            <p class="text-sm sm:text-base">Prime location for your business growth.</p>
+                        </div>
+                    </div>
 
-            <div class="group relative w-full h-[250px] rounded-xl shadow-lg overflow-hidden cursor-pointer">
-                <div class="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
-                    style="background-image: url('https://images.unsplash.com/photo-1615874959474-d609969a20ed');">
-                </div>
-                <div
-                    class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end p-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <h3 class="text-xl font-semibold mb-2">Charming Villa</h3>
-                    <p class="text-sm">A serene escape with a private garden.</p>
-                </div>
-            </div>
+                    <div class="group relative flex-none w-full sm:w-1/2 md:w-1/3 lg:w-1/4 h-[250px] rounded-xl shadow-lg overflow-hidden cursor-pointer mx-4">
+                        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
+                            style="background-image: url('https://images.unsplash.com/photo-1494526585095-c41746248156');">
+                        </div>
+                        <div
+                            class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end p-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <h3 class="text-lg sm:text-xl font-semibold mb-2">Suburban Family Home</h3>
+                            <p class="text-sm sm:text-base">Comfortable living with excellent amenities nearby.</p>
+                        </div>
+                    </div>
 
-            <div class="group relative w-full h-[250px] rounded-xl shadow-lg overflow-hidden cursor-pointer">
-                <div class="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
-                    style="background-image: url('https://images.unsplash.com/photo-1580587771525-78b9dba3b914');">
-                </div>
-                <div
-                    class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end p-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <h3 class="text-xl font-semibold mb-2">Urban Penthouse</h3>
-                    <p class="text-sm">Sophisticated living in the heart of the city.</p>
-                </div>
-            </div>
-
-            <div class="group relative w-full h-[250px] rounded-xl shadow-lg overflow-hidden cursor-pointer">
-                <div class="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
-                    style="background-image: url('https://images.unsplash.com/photo-1507089947368-19c1da9775ae');">
-                </div>
-                <div
-                    class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end p-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <h3 class="text-xl font-semibold mb-2">Cozy Studio Apartment</h3>
-                    <p class="text-sm">Ideal for singles or young professionals.</p>
-                </div>
-            </div>
-
-            <div class="group relative w-full h-[250px] rounded-xl shadow-lg overflow-hidden cursor-pointer">
-                <div class="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
-                    style="background-image: url('https://images.unsplash.com/photo-1512917774080-9991f1c4c750');">
-                </div>
-                <div
-                    class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end p-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <h3 class="text-xl font-semibold mb-2">Spacious Commercial Office</h3>
-                    <p class="text-sm">Prime location for your business growth.</p>
-                </div>
-            </div>
-
-            <div class="group relative w-full h-[250px] rounded-xl shadow-lg overflow-hidden cursor-pointer">
-                <div class="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
-                    style="background-image: url('https://images.unsplash.com/photo-1494526585095-c41746248156');">
-                </div>
-                <div
-                    class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end p-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <h3 class="text-xl font-semibold mb-2">Suburban Family Home</h3>
-                    <p class="text-sm">Comfortable living with excellent amenities nearby.</p>
-                </div>
-            </div>
-
-            <div class="group relative w-full h-[250px] rounded-xl shadow-lg overflow-hidden cursor-pointer">
-                <div class="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
-                    style="background-image: url('https://images.unsplash.com/photo-1572120360610-d971b9d7767c');">
-                </div>
-                <div
-                    class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end p-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <h3 class="text-xl font-semibold mb-2">Renovated Heritage Property</h3>
-                    <p class="text-sm">A blend of classic charm and modern comfort.</p>
+                    <div class="group relative flex-none w-full sm:w-1/2 md:w-1/3 lg:w-1/4 h-[250px] rounded-xl shadow-lg overflow-hidden cursor-pointer mx-4">
+                        <div class="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
+                            style="background-image: url('https://images.unsplash.com/photo-1572120360610-d971b9d7767c');">
+                        </div>
+                        <div
+                            class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end p-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <h3 class="text-lg sm:text-xl font-semibold mb-2">Renovated Heritage Property</h3>
+                            <p class="text-sm sm:text-base">A blend of classic charm and modern comfort.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+      <section class="about-featured-properties py-16 px-4 md:px-8 lg:px-16 bg-gray-800">
+        <div class="container mx-auto">
+            <h2 class="text-4xl md:text-5xl font-bold text-center text-blue-300 mb-12">Why Choose BanshVatika's Featured Properties?</h2>
+            <p class="text-gray-300 text-lg text-center max-w-3xl mx-auto mb-12 leading-relaxed">
+                At BanshVatika Real Estate, our featured properties represent the pinnacle of quality, value, and strategic location.
+                We meticulously select each listing to ensure it meets our high standards, offering you unparalleled opportunities
+                whether you are looking for your dream home, a lucrative investment, or a prime commercial space.
+                Our expertise in the Mumbai and Maharashtra real estate market ensures that you get access to the best properties
+                available, tailored to your specific needs.
+            </p>
 
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature Card 1 -->
+                <div class="bg-gray-700 rounded-xl shadow-lg p-6 flex flex-col items-center text-center animated-border">
+                    <i class="fas fa-handshake text-5xl text-blue-300 mb-4"></i>
+                    <h3 class="text-xl font-semibold text-white mb-2">Expert Guidance</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Our experienced team provides personalized advice, guiding you through every step of the buying or selling process with transparency and integrity.
+                    </p>
+                </div>
 
-  <!-- FOOTER -->
-  <section class="footer">
-        <div class="box-container">
-            <div class="box">
-                <h3>find us here</h3>
-                <p>Address: Office No. 9, Nehru &, Hirani Villa, Junction, Nanda Patkar Rd, Navpada, Vile Parle East, Vile Parle, Mumbai, Maharashtra 400057.</p>
-                <div class="share">
+                <!-- Feature Card 2 -->
+                <div class="bg-gray-700 rounded-xl shadow-lg p-6 flex flex-col items-center text-center animated-border">
+                    <i class="fas fa-city text-5xl text-blue-300 mb-4"></i>
+                    <h3 class="text-xl font-semibold text-white mb-2">Diverse Portfolio</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        From luxurious residential villas to high-potential commercial spaces, our portfolio offers a wide range of properties to suit diverse requirements.
+                    </p>
+                </div>
+
+                <!-- Feature Card 3 -->
+                <div class="bg-gray-700 rounded-xl shadow-lg p-6 flex flex-col items-center text-center animated-border">
+                    <i class="fas fa-chart-line text-5xl text-blue-300 mb-4"></i>
+                    <h3 class="text-xl font-semibold text-white mb-2">Investment Opportunities</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Discover properties with significant growth potential, offering excellent returns on investment in the dynamic real estate market of Maharashtra.
+                    </p>
+                </div>
+
+                <!-- Feature Card 4 -->
+                <div class="bg-gray-700 rounded-xl shadow-lg p-6 flex flex-col items-center text-center animated-border">
+                    <i class="fas fa-cogs text-5xl text-blue-300 mb-4"></i>
+                    <h3 class="text-xl font-semibold text-white mb-2">Seamless Process</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        We streamline the entire real estate transaction, handling all complexities to ensure a smooth, hassle-free experience for our clients.
+                    </p>
+                </div>
+
+                <!-- Feature Card 5 -->
+                <div class="bg-gray-700 rounded-xl shadow-lg p-6 flex flex-col items-center text-center animated-border">
+                    <i class="fas fa-map-marked-alt text-5xl text-blue-300 mb-4"></i>
+                    <h3 class="text-xl font-semibold text-white mb-2">Prime Locations</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Our featured properties are strategically located in prime areas of Mumbai and Maharashtra, offering convenience and accessibility.
+                    </p>
+                </div>
+
+                <!-- Feature Card 6 -->
+                <div class="bg-gray-700 rounded-xl shadow-lg p-6 flex flex-col items-center text-center animated-border">
+                    <i class="fas fa-award text-5xl text-blue-300 mb-4"></i>
+                    <h3 class="text-xl font-semibold text-white mb-2">Quality Assurance</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Every featured property is vetted for quality, legal compliance, and potential, ensuring you make a secure and valuable acquisition.
+                    </p>
                 </div>
             </div>
-            <div class="box">
-                <h3>contact us</h3>
-                <p>+91 9987574333</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 py-12">
+        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center md:text-left">
+            <!-- Quick Links -->
+            <div>
+                <h3 class="text-lg font-semibold text-white mb-4">Quick Links</h3>
+                <ul class="space-y-2">
+                    <li><a href="./index.html" class="text-gray-400 hover:text-blue-300 transition">Home</a></li>
+                    <li><a href="./about.html" class="text-gray-400 hover:text-blue-300 transition">About Us</a></li>
+                    <li><a href="#services" class="text-gray-400 hover:text-blue-300 transition">Services</a></li>
+                    <li><a href="#faq" class="text-gray-400 hover:text-blue-300 transition">FAQ</a></li>
+                    <li><a href="#contact" class="text-gray-400 hover:text-blue-300 transition">Contact</a></li>
+                </ul>
             </div>
-            <div class="box">
-                <h3>Naira Properties</h3>
-                <p>Real estate agent in Mumbai, Maharashtra</p>
-                <p>Luxury Real Estate Brokerage Vile Parle | Juhu | Santacruz | Andheri Residential & Commercial Buy | Sell | Lease | Invest</p>
+
+            <!-- Opening Hours -->
+            <div>
+                <h3 class="text-lg font-semibold text-white mb-4">Opening Hours</h3>
+                <p class="text-gray-400 text-lg">Monday - Saturday: 10:00 AM - 10:00 PM</p>
+                <p class="text-gray-400 text-sm mt-2">Experience reliable service and quality products. We're here to help you stay
+                    connected!</p>
+                <p class="text-gray-400 text-sm mt-2">BanshVatika Real Estate specializes in buying, selling, renting, and
+                    investing in both commercial and residential properties. Our primary areas of expertise cover Mumbai,
+                    Maharashtra.</p>
             </div>
-            <div class="box">
-                <h3>localization</h3>
-                <p>Invest At Naira Properties, we specialize in premium residential and commercial real estate across Vile Parle, Juhu, Andheri, Santacruz and prime pockets of Mumbai. Whether you're looking for a luxury apartment etc</p>
+
+            <!-- Contact Info -->
+            <div>
+                <h3 class="text-lg font-semibold text-white mb-4">Contact Info</h3>
+                <ul class="space-y-2">
+                    <li>
+                        <a href="tel:+918451980807" class="inline-flex items-center text-gray-400 hover:text-blue-300 transition">
+                            <i class="fas fa-phone-alt text-lg mr-2"></i>
+                            <span class="text-base font-medium">+91 84519 80807</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="mailto:info@banshvatika.com"
+                            class="inline-flex items-center text-gray-400 hover:text-blue-300 transition">
+                            <i class="fas fa-envelope text-lg mr-2"></i>
+                            <span class="text-base font-medium">info@banshvatika.com</span>
+                        </a>
+                    </li>
+                    <li class="inline-flex items-start text-gray-400">
+                        <i class="fas fa-map-marker-alt text-lg mr-2 mt-1"></i>
+                        <span class="text-base font-medium">
+                            BanshVatika Real Estate specializes in buying, selling, renting, and investing in both commercial
+                            and residential properties. Our primary areas of expertise cover Mumbai, Maharashtra.
+                        </span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Stay Connected -->
+            <div class="flex flex-col items-center md:items-end">
+                <h3 class="text-lg font-semibold text-white mb-4">Stay Connected</h3>
+                <p class="text-gray-400 text-sm mb-4 text-center md:text-right">Follow us on social media for updates and
+                    offers.</p>
+                <div class="flex justify-center md:justify-end space-x-4 mb-8">
+                    <a href="https://www.facebook.com/banshvatika" target="_blank" rel="noopener noreferrer"
+                        class="text-gray-400 hover:text-blue-600 transition">
+                        <i class="fab fa-facebook-f text-2xl"></i>
+                    </a>
+                    <a href="https://twitter.com/banshvatika" target="_blank" rel="noopener noreferrer"
+                        class="text-gray-400 hover:text-blue-400 transition">
+                        <i class="fab fa-twitter text-2xl"></i>
+                    </a>
+                    <a href="https://www.instagram.com/banshvatika/" target="_blank" rel="noopener noreferrer"
+                        class="text-gray-400 hover:text-pink-500 transition">
+                        <i class="fab fa-instagram text-2xl"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/company/banshvatika" target="_blank" rel="noopener noreferrer"
+                        class="text-gray-400 hover:text-blue-700 transition">
+                        <i class="fab fa-linkedin-in text-2xl"></i>
+                    </a>
+                </div>
             </div>
         </div>
-        <div class="credit"> created by <span>Yurekh IT Solutions</span>  all rights reserved!</div>
-    </section>
-    <!-- footer section ends -->
 
-    <!-- Floating Action Buttons -->
-    <div class="floating-buttons-container">
-        <a href="https://wa.me/919987574333" class="floating-btn whatsapp-btn" target="_blank" aria-label="WhatsApp Us">
+        <!-- Divider line -->
+        <div class="container mx-auto px-4">
+            <hr class="border-gray-700 my-6" />
+            <p class="text-gray-400 text-sm text-center">&copy; 2025 BanshVatika. All rights reserved. Designed with
+                <a href="https://www.yurekhitsolutions.com" target="_blank" rel="noopener noreferrer"
+                    class="hover:text-blue-300">YUREKH IT SOLUTIONS</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Floating Action Buttons (WhatsApp, Call, Scroll to Top) -->
+    <div class="fixed bottom-4 right-4 z-50 flex flex-col space-y-3">
+        <a href="https://wa.me/919930670707"
+            class="bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center text-3xl shadow-lg hover:bg-green-600 transition-all duration-300 ease-in-out transform hover:scale-110"
+            target="_blank" aria-label="WhatsApp Us">
             <i class="fab fa-whatsapp"></i>
         </a>
-        <a href="tel:+919987574333" class="floating-btn phone-btn" aria-label="Call Us">
+        <a href="tel:+919930670707"
+            class="bg-blue-500 text-white w-14 h-14 rounded-full flex items-center justify-center text-3xl shadow-lg hover:bg-blue-600 transition-all duration-300 ease-in-out transform hover:scale-110"
+            aria-label="Call Us">
             <i class="fas fa-phone-alt"></i>
         </a>
-        <button id="scroll-to-top-btn" class="floating-btn scroll-to-top-btn" aria-label="Scroll to Top">
+        <button id="scroll-to-top-btn"
+            class="bg-gray-700 text-white w-14 h-14 rounded-full flex items-center justify-center text-3xl shadow-lg hover:bg-gray-800 transition-all duration-300 ease-in-out transform hover:scale-110 hidden"
+            aria-label="Scroll to Top">
             <i class="fas fa-arrow-up"></i>
         </button>
     </div>
-        <script>  AOS.init();</script>
+
+    <script>
+        // Data for featured properties
+        const properties = [
+            {
+                id: 1,
+                image: './images/services-1.jpg',
+                title: 'Luxury Villa with Sea View',
+                price: '₹2.5 Crore',
+                location: 'Bandra, Mumbai',
+                beds: 4,
+                baths: 3,
+                area: '2000 sqft',
+                description: 'Experience unparalleled luxury in this spacious villa with breathtaking sea views.'
+            },
+            {
+                id: 2,
+                image:'./images/services-1.jpg',
+                title: 'Modern Apartment in City Center',
+                price: '₹1.8 Crore',
+                location: 'Andheri, Mumbai',
+                beds: 2,
+                baths: 2,
+                area: '1200 sqft',
+                description: 'A sleek and modern apartment located in the heart of the city, perfect for urban living.'
+            },
+            {
+                id: 3,
+                image: './images/property-8.jpg',
+                title: 'Prime Commercial Office Space',
+                price: '₹4.0 Crore',
+                location: 'Nariman Point, Mumbai',
+                beds: null,
+                baths: null,
+                area: '5000 sqft',
+                description: 'Expansive commercial space ideal for corporate offices, with excellent connectivity.'
+            },
+            {
+                id: 4,
+                image: './images/property-7.jpg',
+                title: 'Spacious Family Home',
+                price: '₹3.2 Crore',
+                location: 'Thane, Maharashtra',
+                beds: 3,
+                baths: 2,
+                area: '1800 sqft',
+                description: 'A comfortable and spacious home, perfect for a growing family in a peaceful neighborhood.'
+            },
+            {
+                id: 5,
+                image: './images/property-1.jpg',
+                title: 'Exclusive Penthouse Suite',
+                price: '₹12.0 Crore',
+                location: 'Worli, Mumbai',
+                beds: 5,
+                baths: 4,
+                area: '4500 sqft',
+                description: 'Top-floor penthouse with panoramic city views and bespoke interiors.'
+            },
+            {
+                id: 6,
+                image: './images/property-4.jpg',
+                title: 'High-Visibility Retail Shop',
+                price: '₹1.5 Crore',
+                location: 'Dadar, Mumbai',
+                beds: null,
+                baths: null,
+                area: '800 sqft',
+                description: 'Excellent opportunity for retail business in a high foot-traffic area.'
+            }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const propertyContainer = document.getElementById('property-container');
+            const scrolledHeader = document.getElementById('scrolled-header');
+            const hamburger = document.getElementById('hamburger');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const scrollToTopBtn = document.getElementById('scroll-to-top-btn');
+
+            // Populate property cards
+            properties.forEach(property => {
+                const card = document.createElement('div');
+                card.classList.add(
+                    'property-card',
+                    'bg-gray-700',
+                    'rounded-lg',
+                    'shadow-lg',
+                    'overflow-hidden',
+                    'transform',
+                    'transition-all',
+                    'duration-300',
+                    'ease-in-out',
+                    'hover:scale-105',
+                    'hover:shadow-xl',
+                    'cursor-pointer',
+                    'relative'
+                );
+
+                card.innerHTML = `
+                    <div class="relative overflow-hidden h-48">
+                        <img src="${property.image}" alt="${property.title}" class="w-full h-full object-cover rounded-t-lg">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-70"></div>
+                        <span class="absolute top-4 right-4 bg-blue-500 text-white text-sm font-semibold px-3 py-1 rounded-full">${property.price}</span>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-white mb-2">${property.title}</h3>
+                        <p class="text-gray-300 mb-4 flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2 text-blue-300"></i>${property.location}
+                        </p>
+                        <p class="text-gray-400 text-sm mb-4">${property.description}</p>
+                        <div class="flex justify-between items-center text-gray-300 text-sm">
+                            ${property.beds ? `<span class="flex items-center"><i class="fas fa-bed mr-2 text-blue-300"></i>${property.beds} Beds</span>` : ''}
+                            ${property.baths ? `<span class="flex items-center"><i class="fas fa-bath mr-2 text-blue-300"></i>${property.baths} Baths</span>` : ''}
+                            <span class="flex items-center"><i class="fas fa-ruler-combined mr-2 text-blue-300"></i>${property.area}</span>
+                        </div>
+                    </div>
+                `;
+
+                // Add click event listener to toggle 'clicked' class
+                card.addEventListener('click', () => {
+                    // Remove 'clicked' class from all other cards
+                    document.querySelectorAll('.property-card').forEach(c => {
+                        if (c !== card) {
+                            c.classList.remove('clicked');
+                        }
+                    });
+                    // Toggle 'clicked' class on the current card
+                    card.classList.toggle('clicked');
+                });
+
+                propertyContainer.appendChild(card);
+            });
 
 
-  <script src="./script.js"></script>
+            // Header scroll effect
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    scrolledHeader.classList.add('scrolled');
+                } else {
+                    scrolledHeader.classList.remove('scrolled');
+                }
+            });
+
+            // Hamburger menu toggle
+            hamburger.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Scroll to top button functionality
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    scrollToTopBtn.classList.remove('hidden');
+                } else {
+                    scrollToTopBtn.classList.add('hidden');
+                }
+            });
+
+            scrollToTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+           
+        
+        // Automated Carousel for Featured Highlights (existing logic, adapted to new generic structure)
+    const featuredCarouselInner = document.getElementById('carousel-inner');
+    let featuredCurrentIndex = 0; // Renamed for clarity
+    let featuredCarouselInterval; // Renamed for clarity
+    const featuredScrollSpeed = 3000; // milliseconds
+
+    function getFeaturedItemsPerView() {
+        if (window.innerWidth >= 1024) { // lg breakpoint
+            return 4;
+        } else if (window.innerWidth >= 768) { // md breakpoint
+            return 3;
+        } else if (window.innerWidth >= 640) { // sm breakpoint
+            return 2;
+        } else { // extra small screens
+            return 1;
+        }
+    }
+
+    function updateFeaturedCarousel() {
+        const currentItemsPerView = getFeaturedItemsPerView();
+        const featuredCarouselItems = featuredCarouselInner.children;
+        const totalItems = featuredCarouselItems.length;
+
+        if (totalItems === 0) return;
+
+        const maxScrollIndex = Math.max(0, totalItems - currentItemsPerView);
+
+        if (featuredCurrentIndex > maxScrollIndex) {
+            featuredCurrentIndex = 0;
+        }
+
+        let itemWidth = featuredCarouselItems[0].offsetWidth;
+        const style = window.getComputedStyle(featuredCarouselItems[0]);
+        itemWidth += parseFloat(style.marginLeft) + parseFloat(style.marginRight);
+
+        const offset = -featuredCurrentIndex * itemWidth; // Adjusted to scroll by single item width
+
+        featuredCarouselInner.style.transition = `transform ${featuredScrollSpeed / 1000}s ease-in-out`;
+        featuredCarouselInner.style.transform = `translateX(${offset}px)`;
+    }
+
+    function startFeaturedCarousel() {
+        clearInterval(featuredCarouselInterval);
+        featuredCarouselInterval = setInterval(() => {
+            const currentItemsPerView = getFeaturedItemsPerView();
+            const featuredCarouselItems = featuredCarouselInner.children;
+            const totalItems = featuredCarouselItems.length;
+            if (totalItems === 0) return;
+
+            const maxScrollIndex = Math.max(0, totalItems - currentItemsPerView);
+
+            featuredCurrentIndex++;
+            if (featuredCurrentIndex > maxScrollIndex) {
+                featuredCurrentIndex = 0;
+            }
+            updateFeaturedCarousel();
+        }, featuredScrollSpeed + 500);
+    }
+
+    window.addEventListener('resize', () => {
+        featuredCurrentIndex = 0;
+        updateFeaturedCarousel();
+        startFeaturedCarousel();
+    });
+
+    // Initial call to set up and start featured carousel
+    updateFeaturedCarousel();
+    startFeaturedCarousel();
+
+    </script>
+
 </body>
+
 </html>
