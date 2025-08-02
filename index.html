@@ -27,74 +27,77 @@
 
 <body class="text-white font-inter">
     <!-- Fixed Header (this navigation bar will change on scroll) -->
-    <nav id="scrolled-header"
-        class="fixed top-0 left-0 w-full z-50 transition-all duration-300 ease-in-out py-4 bg-transparent text-white">
-        <div class="container mx-auto px-4 flex justify-between items-center">
-            <!-- Logo -->
-            <div class="text-3xl md:text-4xl font-bold">
-                <span class="block text-blue-300 text-sm md:text-base tracking-widest">BanshVatika</span>
-            </div>
+        <nav id="scrolled-header" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 ease-in-out py-4 bg-transparent text-white">
 
-            <!-- Navigation Links (Desktop) -->
-            <nav class="hidden md:flex lg:space-x-12 items-center">
-                <a href="./index.html"
-                    class="nav-link font-medium py-2 px-3 rounded-md text-white hover:text-blue-300">Home</a>
-                <a href="./about.html"
-                    class="nav-link font-medium py-2 px-3 rounded-md text-white hover:text-blue-300">About</a>
-                <a href="./services.html" class="nav-link font-medium py-2 px-3 rounded-md text-white hover:text-blue-300">Services</a>
-                <a href="./featured.html" class="nav-link font-medium py-2 px-3 rounded-md text-white hover:text-blue-300">Featured</a>
-                <a href="./residential.html" class="nav-link font-medium py-2 px-3 rounded-md text-white hover:text-blue-300">Residential</a>
-                <a href="./commerical.html" class="nav-link font-medium py-2 px-3 rounded-md text-white hover:text-blue-300">Commercial</a>
-                <a href="#" class="nav-link font-medium py-2 px-3 rounded-md text-white hover:text-blue-300">FAQ</a>
-                <a href="#" class="nav-link font-medium py-2 px-3 rounded-md text-white hover:text-blue-300">
-                    <span class="text-blue-300">(+91)</span> 8451980807
-                </a>
-            </nav>
+  <div class="container mx-auto px-4 flex justify-between items-center">
+    <!-- Logo -->
+    <div class="flex items-center space-x-3">
+      <img src="./images/loogo.png" alt="BanshVatika Logo" class="h-12 w-12 object-contain" />
+      <span class="text-white text-xl md:text-2xl font-semibold tracking-wide">BanshVatika</span>
+    </div>
 
-            <!-- Hamburger Menu Icon (Mobile) -->
-            <button id="hamburger" class="md:hidden focus:outline-none p-2 rounded-md over:bg-blue-800 transition">
-                <div class="hamburger-line line-top"></div>
-                <div class="hamburger-line line-middle"></div>
-                <div class="hamburger-line line-bottom"></div>
-            </button>
-        </div>
-
-        <!-- Mobile Navigation Menu -->
-        <nav id="mobile-menu" class="hidden md:hidden bg-gray-800 bg-opacity-90 mt-4 mx-4 rounded-lg shadow-xl py-4">
-      <ul class="flex flex-col items-center space-y-4">
-        <li><a href="./index.html" class="block px-4 py-2 text-white hover:text-blue-300 font-medium">Home</a></li>
-        <li><a href="./about.html" class="block px-4 py-2 text-white hover:text-blue-300 font-medium">About</a></li>
-        <li><a href="./services.html" class="block px-4 py-2 text-white hover:text-blue-300 font-medium">Services</a></li>
-        <li><a href="./featured.html" class="block px-4 py-2 text-white hover:text-blue-300 font-medium">Featured</a></li>
-        <li><a href="./residential.html" class="block px-4 py-2 text-white hover:text-blue-300 font-medium">Residential</a></li>
-        <li><a href="./commerical.html" class="block px-4 py-2 text-white hover:text-blue-300 font-medium">Commercial</a></li>
-        <li><a href="#" class="block px-4 py-2 text-white hover:text-blue-300 font-medium">FAQ</a></li>
-        <li><a href="#" class="block px-4 py-2 text-white hover:text-blue-300 font-medium">
-          <span class="text-blue-300">(+91)</span> 8451980807
-        </a></li>
-      </ul>
+    <!-- Navigation Links (Desktop) -->
+    <nav class="hidden md:flex lg:space-x-12 items-center">
+      <a href="./index.html" class="nav-link font-medium py-2 px-3 rounded-md text-white hover:text-blue-300">Home</a>
+      <a href="./about.html" class="nav-link font-medium py-2 px-3 rounded-md text-white hover:text-blue-300">About</a>
+      <a href="./services.html" class="nav-link font-medium py-2 px-3 rounded-md text-white hover:text-blue-300">Services</a>
+      <a href="./featured.html" class="nav-link font-medium py-2 px-3 rounded-md text-white hover:text-blue-300">Featured</a>
+      <a href="./residential.html" class="nav-link font-medium py-2 px-3 rounded-md text-white hover:text-blue-300">Residential</a>
+      <a href="./commerical.html" class="nav-link font-medium py-2 px-3 rounded-md text-white hover:text-blue-300">Commercial</a>
+      <a href="#" class="nav-link font-medium py-2 px-3 rounded-md text-white hover:text-blue-300">FAQ</a>
+      <a href="#" class="nav-link font-medium py-2 px-3 rounded-md text-white hover:text-blue-300">
+        <span class="text-blue-300">(+91)</span> 8451980807
+      </a>
     </nav>
-    </nav>
+
+    <!-- Hamburger Menu Icon (Mobile) -->
+    <button id="hamburger" class="md:hidden focus:outline-none p-2 rounded-md hover:bg-blue-800 transition">
+      <div class="hamburger-line w-6 h-0.5 bg-white my-1"></div>
+      <div class="hamburger-line w-6 h-0.5 bg-white my-1"></div>
+      <div class="hamburger-line w-6 h-0.5 bg-white my-1"></div>
+    </button>
+  </div>
+
+  <!-- Mobile Navigation Menu -->
+       <nav id="mobile-menu" class="hidden md:hidden bg-gray-800 bg-opacity-90 mt-4 mx-4 rounded-lg shadow-xl py-4">
+
+    <ul class="flex flex-col items-center space-y-4">
+      <li><a href="./index.html" class="block px-4 py-2 text-white hover:text-blue-300 font-medium">Home</a></li>
+      <li><a href="./about.html" class="block px-4 py-2 text-white hover:text-blue-300 font-medium">About</a></li>
+      <li><a href="./services.html" class="block px-4 py-2 text-white hover:text-blue-300 font-medium">Services</a></li>
+      <li><a href="./featured.html" class="block px-4 py-2 text-white hover:text-blue-300 font-medium">Featured</a></li>
+      <li><a href="./residential.html" class="block px-4 py-2 text-white hover:text-blue-300 font-medium">Residential</a></li>
+      <li><a href="./commerical.html" class="block px-4 py-2 text-white hover:text-blue-300 font-medium">Commercial</a></li>
+      <li><a href="#" class="block px-4 py-2 text-white hover:text-blue-300 font-medium">FAQ</a></li>
+      <li><a href="#" class="block px-4 py-2 text-white hover:text-blue-300 font-medium">
+        <span class="text-blue-300">(+91)</span> 8451980807
+      </a></li>
+    </ul>
+  </nav>
+</nav>
+
 
     <!-- Hero Section (original content, positioned below the fixed nav) -->
-    <header class="header-bg py-32 md:py-48 ">
-        <div class="container mx-auto px-4 py-16 md:py-24 text-center header-content">
-            <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4 text-white drop-shadow-lg">
-                Your Trusted Partner in<br />Buying, Selling, and Renting Properties.
-            </h1>
-            <p class="text-lg md:text-xl text-gray-300 mb-8 ">
-                Discover your dream property with BanshVatika Real Estate.
-            </p>
-            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-                <a href="#"
-                    class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition transform hover:scale-105">Explore
-                    Properties</a>
-                <a href="#"
-                    class="bg-transparent border-2 border-white hover:border-blue-300 text-white font-bold py-3 px-8 rounded-full shadow-lg transition transform hover:scale-105">Sell
-                    Your Property</a>
-            </div>
-        </div>
-    </header>
+    <header class="header-bg py-32 md:py-48">
+  <div class="container mx-auto px-4 py-16 md:py-24 text-center header-content">
+    <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4 text-white drop-shadow-lg">
+      Your Trusted Partner in<br />Buying, Selling, and Renting Properties.
+    </h1>
+    <p class="text-lg md:text-xl text-gray-300 mb-8">
+      Discover your dream property with BanshVatika Real Estate.
+    </p>
+    <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+      <a href="#"
+        class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition transform hover:scale-105">
+        Start Your Search
+      </a>
+      <a href="#"
+        class="bg-transparent border-2 border-white hover:border-blue-300 text-white font-bold py-3 px-8 rounded-full shadow-lg transition transform hover:scale-105">
+        List Your Property
+      </a>
+    </div>
+  </div>
+</header>
 
 
     <section class="about py-16 md:py-24 bg-[#3f5976] bg-opacity-100" id="about">
@@ -303,6 +306,87 @@
             </div>
         </div>
     </section>
+<!-- Floor Plans Section -->
+<section class="bg-[#3f5976] bg-opacity-100 py-16 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold text-center text-blue-300 mb-12 relative">
+            FLOOR PLANS
+            <div class="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-[180px] h-[4px] rounded-sm bg-blue-300"></div>
+        </h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mb-12">
+            <!-- Floor Plan Card 1 -->
+            <div class="bg-gray-800 rounded-lg shadow-xl overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+                <img src="./images/floor1.png" onerror="this.onerror=null;this.src='https://placehold.co/400x300/333333/FFFFFF?text=Floor+Plan+1';" alt="3BHK - 1315 Sq.Ft." class="w-full h-auto object-cover">
+                <div class="p-4 text-center">
+                    <h3 class="text-lg font-semibold text-white">3BHK - 1315 Sq.Ft.</h3>
+                </div>
+            </div>
+            <!-- Floor Plan Card 2 -->
+            <div class="bg-gray-800 rounded-lg shadow-xl overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+                <img src="./images/floor1.png" onerror="this.onerror=null;this.src='https://placehold.co/400x300/333333/FFFFFF?text=Floor+Plan+2';" alt="3BHK - 1190 Sq.Ft." class="w-full h-auto object-cover">
+                <div class="p-4 text-center">
+                    <h3 class="text-lg font-semibold text-white">3BHK - 1190 Sq.Ft.</h3>
+                </div>
+            </div>
+            <!-- Floor Plan Card 3 -->
+            <div class="bg-gray-800 rounded-lg shadow-xl overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+                <img src="./images/floor1.png" onerror="this.onerror=null;this.src='https://placehold.co/400x300/333333/FFFFFF?text=Floor+Plan+3';" alt="3BHK - 1030 Sq.Ft." class="w-full h-auto object-cover">
+                <div class="p-4 text-center">
+                    <h3 class="text-lg font-semibold text-white">3BHK - 1030 Sq.Ft.</h3>
+                </div>
+            </div>
+           
+        </div>
+
+        
+    </div>
+     <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold text-center text-blue-300 mb-8 relative">
+            A-CLASS LEISURES THAT AMAZE AND AMUSE
+            <div class="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-[180px] h-[4px] rounded-sm bg-blue-300"></div>
+        </h2>
+        <p class="text-gray-300 text-lg text-center max-w-3xl mx-auto mb-12">
+            Perfectly curated to suit every mood, whim and fancy. At BanshVatika, experience an
+            entertaining array of top-tier urban recreations & modern amenities that unlock for you a
+            world of limitless pleasures and leisures.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 ml-10 lg:grid-cols-3 gap-y-4 gap-x-8 text-gray-300 mb-12">
+            <ul class="list-none space-y-2 items-center">
+                <li class="flex items-center "><span class="text-blue-300 mr-2">&#10003;</span>Kids Play Area</li>
+                <li class="flex items-center"><span class="text-blue-300 mr-2">&#10003;</span>Jogging Track</li>
+                <li class="flex items-center"><span class="text-blue-300 mr-2">&#10003;</span>Landscape Garden</li>
+                <li class="flex items-center"><span class="text-blue-300 mr-2">&#10003;</span>Open Sky Gym</li>
+                <li class="flex items-center"><span class="text-blue-300 mr-2">&#10003;</span>Reflexology Path</li>
+                <li class="flex items-center"><span class="text-blue-300 mr-2">&#10003;</span>Sky High Yoga & Meditation Club</li>
+                <li class="flex items-center"><span class="text-blue-300 mr-2">&#10003;</span>Senior Citizen Sitout</li>
+            </ul>
+            <ul class="list-none space-y-2">
+                <li class="flex items-center"><span class="text-blue-300 mr-2">&#10003;</span>Party Lawn with Fire Place Sitout</li>
+                <li class="flex items-center"><span class="text-blue-300 mr-2">&#10003;</span>Sky Lounge</li>
+                <li class="flex items-center"><span class="text-blue-300 mr-2">&#10003;</span>Solar Panel</li>
+                <li class="flex items-center"><span class="text-blue-300 mr-2">&#10003;</span>10.5 ft Ceiling Heights</li>
+                <li class="flex items-center"><span class="text-blue-300 mr-2">&#10003;</span>Well-Equipped Gymnasium on E-Deck</li>
+                <li class="flex items-center"><span class="text-blue-300 mr-2">&#10003;</span>Elevator Till Rooftop</li>
+            </ul>
+            <ul class="list-none space-y-2">
+                <li class="flex items-center"><span class="text-blue-300 mr-2">&#10003;</span>Elegant Vitrified Flooring in Every Room</li>
+                <li class="flex items-center"><span class="text-blue-300 mr-2">&#10003;</span>Stress-Free Surface Parking</li>
+                <li class="flex items-center"><span class="text-blue-300 mr-2">&#10003;</span>Double Height Air Conditioned Entrance Lobby</li>
+                <li class="flex items-center"><span class="text-blue-300 mr-2">&#10003;</span>Society Office</li>
+                <li class="flex items-center"><span class="text-blue-300 mr-2">&#10003;</span>Branded CP Fittings in Bathroom & Kitchen</li>
+                <li class="flex items-center"><span class="text-blue-300 mr-2">&#10003;</span>Advanced Level Security System</li>
+                <li class="flex items-center"><span class="text-blue-300 mr-2">&#10003;</span>Rain Water Harvesting & many more...</li>
+            </ul>
+        </div>
+
+       
+    </div>
+</section>
+
+<!-- A-Class Leisures and Amenities Section (from previous turn, now included for completeness) -->
+
 
     <!-- Residential Properties Section -->
     <section class="residential-properties py-16 md:py-24 bg-gray-900" id="residential-properties">
@@ -545,7 +629,7 @@
   <div class="container mx-auto px-4">
     <hr class="border-gray-700 my-6" />
     <p class="text-gray-400 text-sm text-center">&copy; 2025 BanshVatika. All rights reserved. Designed with 
-      <a href="https://www.yurekhitsolutions.com" target="_blank" rel="noopener noreferrer" class="hover:text-blue-300">YUREKH IT SOLUTIONS</a>
+      <a href="https://yurekh.com/" target="_blank" rel="noopener noreferrer" class="hover:text-blue-300">YUREKH IT SOLUTIONS</a>
     </p>
   </div>
 </footer>
