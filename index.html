@@ -25,18 +25,16 @@
   />
 </head>
 
-<body class="text-white font-inter">
+<body class="text-white font-inter ">
     <!-- Fixed Header (this navigation bar will change on scroll) -->
-        <nav id="scrolled-header" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 ease-in-out py-4 bg-transparent text-white">
+<nav id="scrolled-header" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 ease-in-out py-4 bg-transparent text-white">
 
   <div class="container mx-auto px-4 flex justify-between items-center">
-    <!-- Logo -->
     <div class="flex items-center space-x-3">
-      <img src="./images/loogo.png" alt="BanshVatika Logo" class="h-12 w-12 object-contain" />
+      <img src="./images/loogo.png" alt="BanshVatika Logo" class="h-20 w-20 object-contain" />
       <span class="text-white text-xl md:text-2xl font-semibold tracking-wide">BanshVatika</span>
     </div>
 
-    <!-- Navigation Links (Desktop) -->
     <nav class="hidden md:flex lg:space-x-12 items-center">
       <a href="./index.html" class="nav-link font-medium py-2 px-3 rounded-md text-white hover:text-blue-300">Home</a>
       <a href="./about.html" class="nav-link font-medium py-2 px-3 rounded-md text-white hover:text-blue-300">About</a>
@@ -50,7 +48,6 @@
       </a>
     </nav>
 
-    <!-- Hamburger Menu Icon (Mobile) -->
     <button id="hamburger" class="md:hidden focus:outline-none p-2 rounded-md hover:bg-blue-800 transition">
       <div class="hamburger-line w-6 h-0.5 bg-white my-1"></div>
       <div class="hamburger-line w-6 h-0.5 bg-white my-1"></div>
@@ -58,8 +55,7 @@
     </button>
   </div>
 
-  <!-- Mobile Navigation Menu -->
-       <nav id="mobile-menu" class="hidden md:hidden bg-gray-800 bg-opacity-90 mt-4 mx-4 rounded-lg shadow-xl py-4">
+  <nav id="mobile-menu" class="hidden md:hidden bg-gray-800 bg-opacity-90 mt-4 mx-4 rounded-lg shadow-xl py-4">
 
     <ul class="flex flex-col items-center space-y-4">
       <li><a href="./index.html" class="block px-4 py-2 text-white hover:text-blue-300 font-medium">Home</a></li>
@@ -75,8 +71,6 @@
     </ul>
   </nav>
 </nav>
-
-
     <!-- Hero Section (original content, positioned below the fixed nav) -->
     <header class="header-bg py-32 md:py-48">
   <div class="container mx-auto px-4 py-16 md:py-24 text-center header-content">
@@ -100,56 +94,57 @@
 </header>
 
 
-    <section class="about py-16 md:py-24 bg-[#3f5976] bg-opacity-100" id="about">
-        <h1 class="heading text-3xl md:text-4xl font-bold text-center text-blue-300 mb-12 relative">
-            About Us
-            <div class="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-[180px] h-[4px] rounded-sm bg-blue-300"></div>
-        </h1>
+    <section class="about pt-16 md:pt-24 bg-[#3f5976] bg-opacity-100" id="about">
+    <h1 class="heading text-3xl md:text-4xl font-bold text-center text-blue-300 mb-12 relative">
+        About Us
+        <div class="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-[180px] h-[4px] rounded-sm bg-blue-300"></div>
+    </h1>
 
-        <div class="row flex flex-col md:flex-row-reverse items-center justify-center gap-8 md:gap-16 max-w-6xl mx-auto px-4">
-            <!-- Image Gallery (now on the right for desktop) -->
-            <div class="image-gallery flex-1 grid grid-cols-2 gap-4 max-w-xl overflow-hidden ">
-                <img src="./images/property-1.jpg" alt="Modern Home Interior"
-                    class="w-full h-48 object-cover rounded-md transition transform hover:scale-105 shadow-md">
-                <img src="./images/property-2.jpg" alt="Suburban House Exterior"
-                    class="w-full h-48 object-cover rounded-md transition transform hover:scale-105 shadow-md">
-                <img src="./images/property-3.jpg" alt="City Apartment View"
-                    class="w-full h-48 object-cover rounded-md transition transform hover:scale-105 shadow-md">
-                <img src="./images/property-4.jpg" alt="Architectural Detail"
-                    class="w-full h-48 object-cover rounded-md transition transform hover:scale-105 shadow-md">
-            </div>
-            <!-- Content (now on the left for desktop) -->
-            <div class="content flex-1 max-w-2xl text-left">
-                <h3 class="title text-2xl md:text-3xl font-semibold text-white mb-6">Your Trusted Partner in Real Estate</h3>
-                <p class="text-gray-300 text-base md:text-lg leading-relaxed mb-6">
-                    Welcome to <span class="font-bold text-blue-300">BanshVatika Properties</span>, where we
-                    transform dreams into addresses and aspirations into homes. As a leading force in the real
-                    estate industry, we take pride in crafting not just living spaces, but vibrant communities that
-                    resonate with the essence of modern living.
-                </p>
-                <p class="text-gray-300 text-base md:text-lg leading-relaxed mb-6">
-                    At <span class="font-bold text-blue-300">BanshVatika Properties</span>, we understand that a home is more than just bricks and mortar; it's a
-                    sanctuary where memories are created, families are nurtured, and futures are shaped. Our
-                    commitment is to empower you with the keys to your ideal lifestyle, whether it's a cozy
-                    apartment, a spacious house, or an investment opportunity that aligns with your vision.
-                </p>
-                <p class="text-gray-300 text-base md:text-lg leading-relaxed mb-6">
-                    What sets us apart is our unwavering dedication to excellence, integrity, and customer
-                    satisfaction. With a team of seasoned professionals who boast a wealth of experience in real
-                    estate, we navigate the complexities of the market to offer you tailored solutions that meet
-                    your unique needs.
-                </p>
-
-                <a href="./about.html"
-                    class="btn inline-block py-3 px-8 bg-blue-300 text-white font-bold rounded-lg shadow-lg transition transform hover:scale-105 hover:bg-blue-700">Explore
-                    More</a>
-            </div>
-
+    <div class="row flex flex-col md:flex-row-reverse items-center justify-center gap-8 md:gap-16 max-w-6xl mx-auto px-4">
+        <!-- Image Gallery (now on the right for desktop) -->
+        <div class="image-gallery flex-1 grid grid-cols-2 gap-4 max-w-xl overflow-hidden ">
+            <img src="./images/property-1.jpg" alt="Modern Home Interior"
+                class="w-full h-48 object-cover rounded-md transition transform hover:scale-105 shadow-md">
+            <img src="./images/property-2.jpg" alt="Suburban House Exterior"
+                class="w-full h-48 object-cover rounded-md transition transform hover:scale-105 shadow-md">
+            <img src="./images/property-3.jpg" alt="City Apartment View"
+                class="w-full h-48 object-cover rounded-md transition transform hover:scale-105 shadow-md">
+            <img src="./images/property-4.jpg" alt="Architectural Detail"
+                class="w-full h-48 object-cover rounded-md transition transform hover:scale-105 shadow-md">
         </div>
-        <div class="mt-12 max-w-6xl mx-auto px-4">
-            <img src="./images/skyline-sty.png" alt="City Skyline" class="w-full h-auto object-cover rounded-lg shadow-lg">
+        <!-- Content (now on the left for desktop) -->
+        <div class="content flex-1 max-w-2xl text-left">
+            <h3 class="title text-2xl md:text-3xl font-semibold text-white mb-6">Your Trusted Partner in Real Estate</h3>
+            <p class="text-gray-300 text-base md:text-lg leading-relaxed mb-6">
+                Welcome to <span class="font-bold text-blue-300">BanshVatika Properties</span>, where we
+                transform dreams into addresses and aspirations into homes. As a leading force in the real
+                estate industry, we take pride in crafting not just living spaces, but vibrant communities that
+                resonate with the essence of modern living.
+            </p>
+            <p class="text-gray-300 text-base md:text-lg leading-relaxed mb-6">
+                At <span class="font-bold text-blue-300">BanshVatika Properties</span>, we understand that a home is more than just bricks and mortar; it's a
+                sanctuary where memories are created, families are nurtured, and futures are shaped. Our
+                commitment is to empower you with the keys to your ideal lifestyle, whether it's a cozy
+                apartment, a spacious house, or an investment opportunity that aligns with your vision.
+            </p>
+            <p class="text-gray-300 text-base md:text-lg leading-relaxed mb-6">
+                What sets us apart is our unwavering dedication to excellence, integrity, and customer
+                satisfaction. With a team of seasoned professionals who boast a wealth of experience in real
+                estate, we navigate the complexities of the market to offer you tailored solutions that meet
+                your unique needs.
+            </p>
+
+            <a href="./about.html"
+                class="btn inline-block py-3 px-8 bg-blue-300 text-white font-bold rounded-lg shadow-lg transition transform hover:scale-105 hover:bg-blue-700">Explore
+                More</a>
         </div>
-    </section>
+
+    </div>
+    <div class="mt-12 max-w-6xl mx-auto px-4">
+        <img src="./images/skyline-sty.png" alt="City Skyline" class="w-full h-auto object-cover rounded-lg shadow-lg">
+    </div>
+</section>
+
 
   <section class="services py-16 md:py-24 bg-gray-900" id="services">
     <h1 class="heading text-3xl md:text-4xl font-bold text-center text-blue-300 mb-12 relative">
@@ -208,7 +203,7 @@
 
     <!-- Featured Highlights Section - Automated Carousel -->
     <section class="bg-[#3f5976] bg-opacity-100 py-12">
-        <div class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="heading text-3xl md:text-4xl font-bold text-center text-blue-300 mb-12 relative">Featured Highlights
                 <div class="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-[180px] h-[4px] rounded-sm bg-blue-300"></div>
             </h2>
@@ -557,11 +552,12 @@
 
 
     <!-- Footer Section -->
- <footer class="bg-gray-800 py-12">
-  <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center md:text-left">
+     <section class="">
+ <footer class="bg-gray-800 py-16 md:py-24  ">
+  <div class="container  max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center md:text-left">
     <!-- Quick Links -->
     <div>
-      <h3 class="text-lg font-semibold text-white mb-4">Quick Links</h3>
+      <h3 class="text-lg  font-semibold text-white mb-4">Quick Links</h3>
       <ul class="space-y-2">
         <li><a href="./index.html" class="text-gray-400 hover:text-blue-300 transition">Home</a></li>
         <li><a href="./about.html" class="text-gray-400 hover:text-blue-300 transition">About Us</a></li>
@@ -633,6 +629,7 @@
     </p>
   </div>
 </footer>
+</section>
   <div class="fixed bottom-4 right-4 z-50 flex flex-col space-y-3">
         <a href="https://wa.me/919930670707" class="bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center text-3xl shadow-lg hover:bg-green-600 transition-all duration-300 ease-in-out transform hover:scale-110" target="_blank" aria-label="WhatsApp Us">
             <i class="fab fa-whatsapp"></i>

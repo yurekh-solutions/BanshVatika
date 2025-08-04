@@ -68,16 +68,14 @@
 
 <body class="text-white font-inter bg-gray-900">
     <!-- Fixed Header (this navigation bar will change on scroll) -->
-          <nav id="scrolled-header" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 ease-in-out py-4 bg-transparent text-white">
+   <nav id="scrolled-header" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 ease-in-out py-4 bg-transparent text-white">
 
   <div class="container mx-auto px-4 flex justify-between items-center">
-    <!-- Logo -->
     <div class="flex items-center space-x-3">
-      <img src="./images/loogo.png" alt="BanshVatika Logo" class="h-12 w-12 object-contain" />
+      <img src="./images/loogo.png" alt="BanshVatika Logo" class="h-20 w-20 object-contain" />
       <span class="text-white text-xl md:text-2xl font-semibold tracking-wide">BanshVatika</span>
     </div>
 
-    <!-- Navigation Links (Desktop) -->
     <nav class="hidden md:flex lg:space-x-12 items-center">
       <a href="./index.html" class="nav-link font-medium py-2 px-3 rounded-md text-white hover:text-blue-300">Home</a>
       <a href="./about.html" class="nav-link font-medium py-2 px-3 rounded-md text-white hover:text-blue-300">About</a>
@@ -91,7 +89,6 @@
       </a>
     </nav>
 
-    <!-- Hamburger Menu Icon (Mobile) -->
     <button id="hamburger" class="md:hidden focus:outline-none p-2 rounded-md hover:bg-blue-800 transition">
       <div class="hamburger-line w-6 h-0.5 bg-white my-1"></div>
       <div class="hamburger-line w-6 h-0.5 bg-white my-1"></div>
@@ -99,8 +96,7 @@
     </button>
   </div>
 
-  <!-- Mobile Navigation Menu -->
-       <nav id="mobile-menu" class="hidden md:hidden bg-gray-800 bg-opacity-90 mt-4 mx-4 rounded-lg shadow-xl py-4">
+  <nav id="mobile-menu" class="hidden md:hidden bg-gray-800 bg-opacity-90 mt-4 mx-4 rounded-lg shadow-xl py-4">
 
     <ul class="flex flex-col items-center space-y-4">
       <li><a href="./index.html" class="block px-4 py-2 text-white hover:text-blue-300 font-medium">Home</a></li>
@@ -116,7 +112,6 @@
     </ul>
   </nav>
 </nav>
-
     <!-- Hero Section -->
      
     <section class="hero relative h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden" data-aos="fade">
@@ -130,14 +125,14 @@
     </section>
 
     <!-- Featured Properties Section -->
-    <section class="featured py-16 px-4 md:px-8 lg:px-16">
+    <section class="featured py-16 px-4 max-w-7xl mx-auto md:px-8 lg:px-16">
         <h2 class="text-4xl md:text-5xl font-bold text-center text-blue-300 mb-12">Our Featured Listings</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="property-container">
             <!-- Property cards will be dynamically inserted here by JavaScript -->
         </div>
     </section>
   <section class="bg-[#3f5976] bg-opacity-100 py-12">
-        <div class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="heading text-3xl md:text-4xl font-bold text-center text-blue-300 mb-12 relative">Featured Highlights
                 <div class="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-[180px] h-[4px] rounded-sm bg-blue-300"></div>
             </h2>
@@ -236,7 +231,7 @@
         </div>
     </section>
       <section class="about-featured-properties py-16 px-4 md:px-8 lg:px-16 bg-gray-800">
-        <div class="container mx-auto">
+        <div class="container max-w-7xl mx-auto">
             <h2 class="text-4xl md:text-5xl font-bold text-center text-blue-300 mb-12">Why Choose BanshVatika's Featured Properties?</h2>
             <p class="text-gray-300 text-lg text-center max-w-3xl mx-auto mb-12 leading-relaxed">
                 At BanshVatika Real Estate, our featured properties represent the pinnacle of quality, value, and strategic location.
@@ -306,7 +301,7 @@
 
     <!-- Footer -->
     <footer class="bg-gray-800 py-12">
-        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center md:text-left">
+        <div class="container max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center md:text-left">
             <!-- Quick Links -->
             <div>
                 <h3 class="text-lg font-semibold text-white mb-4">Quick Links</h3>
