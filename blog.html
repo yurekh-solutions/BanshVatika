@@ -63,7 +63,7 @@
     </nav>
 
     <!-- Blog Section -->
-    <section class="blog-listing-section py-24 md:py-32 bg-gray-900 min-h-screen">
+    <section class="blog-listing-section pt-32 pb-14 bg-gray-900">
         <div class="max-w-7xl mx-auto px-4">
             <!-- Ainos Blog Embed -->
             <div id="ainos-blog" data-limit="6" data-style="grid" data-site="https://bansh-vatika.vercel.app/"></div>
@@ -155,9 +155,45 @@
         <a href="tel:+919930670707" class="bg-blue-500 text-white w-14 h-14 rounded-full flex items-center justify-center text-3xl shadow-lg hover:bg-blue-600 transition-all duration-300 ease-in-out transform hover:scale-110" aria-label="Call Us">
             <i class="fas fa-phone-alt"></i>
         </a>
+        <button id="scroll-to-top-btn" class="bg-gray-700 text-white w-14 h-14 rounded-full flex items-center justify-center text-3xl shadow-lg hover:bg-gray-800 transition-all duration-300 ease-in-out transform hover:scale-110 hidden" aria-label="Scroll to Top">
+            <i class="fas fa-arrow-up"></i>
+        </button>
     </div>
 
     <script src="./script.js"></script>
+
+    <script>
+        // Pure card pe click karne pe bhi post page khule (title link pe programmatic click)
+        document.addEventListener('DOMContentLoaded', function () {
+            var container = document.getElementById('ainos-blog');
+            if (!container) return;
+
+            // Pointer cursor on cards
+            var style = document.createElement('style');
+            style.textContent = '#ainos-blog > * { cursor: pointer; }';
+            document.head.appendChild(style);
+
+            container.addEventListener('click', function (e) {
+                // Agar asli link pe click hua toh embed khud handle karega
+                if (e.target.closest('a')) return;
+
+                // Click hua card dhundo (container ka direct child)
+                var node = e.target;
+                while (node && node.parentElement !== container) {
+                    node = node.parentElement;
+                    if (node === document.body) return;
+                }
+                if (!node) return;
+
+                // Card ke andar wale post link pe click trigger karo
+                var link = node.querySelector('a[href]');
+                if (link) {
+                    e.preventDefault();
+                    link.click();
+                }
+            });
+        });
+    </script>
 
 </body>
 
