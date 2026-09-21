@@ -582,18 +582,20 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Close property detail modal
-    closeDetailBtn.addEventListener('click', function () {
-        propertyDetailOverlay.classList.add('hidden');
-        document.body.classList.remove('overflow-hidden'); // Restore background scrolling
-    });
-
-    // Close modal if clicked outside (on the overlay itself)
-    propertyDetailOverlay.addEventListener('click', function (event) {
-        if (event.target === propertyDetailOverlay) {
+    if (closeDetailBtn && propertyDetailOverlay) {
+        closeDetailBtn.addEventListener('click', function () {
             propertyDetailOverlay.classList.add('hidden');
             document.body.classList.remove('overflow-hidden');
-        }
-    });
+        });
+
+        // Close modal if clicked outside (on the overlay itself)
+        propertyDetailOverlay.addEventListener('click', function (event) {
+            if (event.target === propertyDetailOverlay) {
+                propertyDetailOverlay.classList.add('hidden');
+                document.body.classList.remove('overflow-hidden');
+            }
+        });
+    }
 
     // Services Section Tabs
     serviceTabs.forEach(tab => {
@@ -615,6 +617,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // --- Generic Carousel Logic Function ---
     function createCarousel(carouselInnerId, tabSelector, propertyType) {
         const carouselInner = document.getElementById(carouselInnerId);
+        if (!carouselInner) return; // Exit if carousel doesn't exist on this page
         const tabs = document.querySelectorAll(tabSelector);
         let currentIndex = 0;
         let carouselInterval;
@@ -732,6 +735,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Automated Carousel for Featured Highlights (now uses dynamic generation)
     const featuredCarouselInner = document.getElementById('carousel-inner');
+    if (featuredCarouselInner) {
     let featuredCurrentIndex = 0;
     let featuredCarouselInterval;
     const featuredScrollSpeed = 3000;
@@ -822,9 +826,11 @@ document.addEventListener('DOMContentLoaded', function () {
     renderFeaturedHighlights(); // Render the items first
     updateFeaturedCarousel();
     startFeaturedCarousel();
+    } // end if featuredCarouselInner
 
 
     // Contact Form - WhatsApp integration
+    if (inquiryForm) {
     inquiryForm.addEventListener('submit', function (e) {
         e.preventDefault(); // Prevent default form submission
 
@@ -861,6 +867,7 @@ I am interested in discussing this further.`;
         formMessage.style.color = '#4CAF50'; // Green color for success
         inquiryForm.reset(); // Clear form fields
     });
+    } // end if inquiryForm
 
     // Function to scroll to the Contact Us section
     window.scrollToContact = function() {
@@ -885,28 +892,16 @@ const scrollToTopBtn = document.getElementById('scroll-to-top-btn');
 
 // Show or hide the scroll-to-top button based on scroll position
 
-window.onscroll = function() {
-
-    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-
-        scrollToTopBtn.style.display = 'flex'; // Use flex to center icon
-
-    } else {
-
-        scrollToTopBtn.style.display = 'none';
-
-    }
-
-};
-
-
-
-// Scroll to the top of the document when the button is clicked
-
-scrollToTopBtn.onclick = function() {
-
-    document.body.scrollTop = 0; // For Safari
-
-    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-
-};
+if (scrollToTopBtn) {
+    window.onscroll = function() {
+        if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+            scrollToTopBtn.style.display = 'flex';
+        } else {
+            scrollToTopBtn.style.display = 'none';
+        }
+    };
+    scrollToTopBtn.onclick = function() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    };
+}
